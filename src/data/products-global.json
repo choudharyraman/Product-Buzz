@@ -1,0 +1,156 @@
+[
+  {
+    "id": "notion",
+    "name": "Notion",
+    "tagline": "The all-in-one workspace for notes, docs, databases, and wikis.",
+    "logo": null,
+    "category": "Productivity",
+    "region": "global",
+    "founded": "2016",
+    "founders": "Ivan Zhao, Simon Last",
+    "hq": "San Francisco, USA",
+    "businessModel": "Freemium SaaS",
+    "problem": "Teams and individuals struggled with scattered information across multiple apps — Slack for messaging, Google Docs for writing, Trello for tasks. There was no single flexible workspace that could adapt to how each team actually works.",
+    "keyFeatures": [
+      "Blocks-based editor (text, databases, kanban, galleries)",
+      "Nested pages and wikis for structured knowledge",
+      "Real-time collaboration with comments and mentions",
+      "Templates marketplace for quick project setups",
+      "Database views: table, board, calendar, timeline, gallery"
+    ],
+    "businessModelDetail": "Free tier with generous limits; Plus ($8/mo), Business ($15/mo), Enterprise (custom). Revenue also from Notion AI add-on at $8/member/mo.",
+    "growthStory": "Notion grew almost entirely through word-of-mouth and community. After a rocky early start, the 2018 relaunch with a beautiful new design and generous free plan sparked viral adoption. Indie hackers and startup teams championed it on Twitter and ProductHunt. By 2021, Notion reached a $10B valuation — remarkable for a product-led growth company with minimal paid marketing. The Notion template ecosystem turned every power user into a growth engine.",
+    "keyMetrics": ["$10B valuation (2021)", "35M+ users", "50K+ templates", "$275M raised"],
+    "pmLessons": [
+      "Product-led growth (PLG) works when your product has strong aha moments — Notion's aha moment was the first time a user built their own custom workflow.",
+      "Flexibility is a double-edged sword. Notion's blank-canvas problem slowed early adoption until templates made onboarding concrete.",
+      "Community as a moat: When users build and share templates, they become invested advocates who recruit others.",
+      "Freemium requires a clear usage limit that causes natural upgrade pressure — Notion's block limit did exactly that.",
+      "Timing matters: The remote work surge of 2020 accelerated Notion adoption by 10x as teams scrambled for collaboration tools."
+    ]
+  },
+  {
+    "id": "figma",
+    "name": "Figma",
+    "tagline": "Collaborative interface design tool that runs in the browser.",
+    "logo": null,
+    "category": "Design Tools",
+    "region": "global",
+    "founded": "2012",
+    "founders": "Dylan Field, Evan Wallace",
+    "hq": "San Francisco, USA",
+    "businessModel": "Freemium SaaS",
+    "problem": "Design was locked inside expensive desktop apps like Sketch (Mac-only) with no real-time collaboration. Designers emailed static files, feedback was lost, and handoff to developers was painful. Design was a bottleneck, not a shared activity.",
+    "keyFeatures": [
+      "Browser-based editor with zero install friction",
+      "Real-time multi-user collaboration (like Google Docs for design)",
+      "Component libraries and design systems at scale",
+      "Dev Mode for developer handoff with code snippets",
+      "Prototyping and interactive flows built-in",
+      "FigJam whiteboard for brainstorming and workshops"
+    ],
+    "businessModelDetail": "Free tier (3 projects); Professional ($12/editor/mo); Organization ($45/editor/mo); Enterprise (custom). Viewers are always free, which drives viral adoption.",
+    "growthStory": "Figma bet on the browser when everyone said it was impossible to build a professional design tool in WebGL. That bet paid off — by being browser-first, Figma enabled real-time collaboration that Sketch could never match. Free viewers meant every designer who shared a link was an acquisition channel. Adobe's $20B acquisition attempt in 2022 (blocked by regulators) validated Figma's dominance. Today Figma has effectively become the operating system of product design.",
+    "keyMetrics": ["$20B Adobe acquisition offer (2022)", "$700M ARR", "4M+ users", "Free viewers drive viral loops"],
+    "pmLessons": [
+      "Platform bets win markets. Figma's browser-first bet was contrarian but created an unbridgeable moat — collaboration simply doesn't work the same way on a desktop app.",
+      "Make stakeholders first-class users. By making viewer access free, every Figma file became a distribution channel to PMs, developers, and execs.",
+      "Solve the collaboration problem, not just the tool problem. Figma didn't just make a better Sketch; it redefined design as a team sport.",
+      "Network effects in B2B: Each new design team that adopts Figma pulls in developers, PMs, and eventually the whole org.",
+      "Freemium limit design: The 3-project limit creates real pain at exactly the moment teams are bought-in, maximizing conversion."
+    ]
+  },
+  {
+    "id": "slack",
+    "name": "Slack",
+    "tagline": "Where work happens — team messaging that replaces email for internal comms.",
+    "logo": null,
+    "category": "Communication",
+    "region": "global",
+    "founded": "2013",
+    "founders": "Stewart Butterfield, Cal Henderson, Eric Costello, Serguei Mourachov",
+    "hq": "San Francisco, USA",
+    "businessModel": "Freemium SaaS",
+    "problem": "Internal team communication was fragmented across email threads, scattered IMs, and endless CC chains. Finding a past decision or file meant digging through hundreds of emails. Email was built for external communication, not fast-moving team collaboration.",
+    "keyFeatures": [
+      "Channels for organized topic-based conversations",
+      "Threads to keep discussions focused without noise",
+      "Searchable message history across the entire org",
+      "3,000+ app integrations (Jira, GitHub, Zoom, etc.)",
+      "Huddles for spontaneous voice/video conversations",
+      "Workflow Builder for no-code automation"
+    ],
+    "businessModelDetail": "Free (90-day message history); Pro ($7.25/user/mo); Business+ ($12.50/user/mo); Enterprise Grid (custom pricing). Acquired by Salesforce for $27.7B in 2021.",
+    "growthStory": "Slack launched publicly in 2013 after Stewart Butterfield pivoted from a failed gaming company (Glitch). Within 24 hours of launch, 8,000 companies signed up. Growth was driven by bottom-up adoption — individual teams would adopt Slack, then it would spread across the company. By 2015, Slack was the fastest business app to reach $1B valuation. The Salesforce acquisition in 2021 for $27.7B was the largest software acquisition at the time.",
+    "keyMetrics": ["$27.7B Salesforce acquisition", "18M daily active users", "750,000+ organizations", "$902M ARR at acquisition"],
+    "pmLessons": [
+      "Bottoms-up B2B growth: Slack grew by winning individual teams first, then expanding to the whole company — a playbook now called Product-Led Growth.",
+      "The network effect is local then global: Slack's value increases as more teammates use it, creating lock-in before any sales conversation happens.",
+      "Reduce friction at every step: Slack's onboarding puts you in a channel with real conversations within 60 seconds. First-session value is everything.",
+      "Integrations as a moat: 3,000+ integrations means Slack sits at the center of every tool a team uses, making it very hard to rip out.",
+      "Pivot stories matter: Slack is a masterclass in recognizing the most valuable part of a failed product (the internal messaging tool built for Glitch) and building a company around it."
+    ]
+  },
+  {
+    "id": "linear",
+    "name": "Linear",
+    "tagline": "The issue tracker built for high-performance software teams.",
+    "logo": null,
+    "category": "Developer Tools",
+    "region": "global",
+    "founded": "2019",
+    "founders": "Karri Saarinen, Toomas Römer, Jori Lallo",
+    "hq": "San Francisco, USA",
+    "businessModel": "Freemium SaaS",
+    "problem": "Jira was slow, cluttered, and required admin overhead just to create a ticket. Modern software teams — especially startups — needed an issue tracker that felt like a tool for engineers, not middle management. Speed and keyboard-first workflows were completely absent from existing tools.",
+    "keyFeatures": [
+      "Keyboard-first interface with 50+ shortcuts",
+      "Sub-100ms UI responses (exceptionally fast for a web app)",
+      "Cycles (sprints) with auto-scheduling intelligence",
+      "Project roadmaps and milestone tracking",
+      "GitHub/GitLab auto-linking for commit-to-issue tracing",
+      "Opinionated workflows that enforce team hygiene"
+    ],
+    "businessModelDetail": "Free (up to 250 issues); Standard ($8/user/mo); Plus ($14/user/mo); Enterprise (custom). Raised $52M Series B at $400M valuation.",
+    "growthStory": "Linear grew through developer word-of-mouth by being unapologetically opinionated — it didn't try to be everything to everyone. Its invite-only beta created scarcity and buzz. Engineers who experienced its speed became internal champions, driving team-wide adoption. Linear's design quality attracted press from design and tech communities far beyond its core market. By staying focused on high-performance engineering teams and refusing to add bloat, Linear became the aspirational choice for startup engineering culture.",
+    "keyMetrics": ["$400M valuation", "$52M raised", "Used by 10,000+ companies", "Sub-100ms UI response time"],
+    "pmLessons": [
+      "Opinionated products build passionate fans. Linear's refusal to be everything to everyone created a product identity that resonates deeply with its target users.",
+      "Performance is a feature, not a detail. When Linear advertised sub-100ms responses, engineers understood immediately why that matters in daily use.",
+      "Scarcity drives desire: Invite-only access made Linear feel exclusive, turning early adopters into status-conscious advocates.",
+      "Design quality signals product quality: A beautifully crafted UI tells engineers that the founders care about details — exactly the signal they trust.",
+      "Say no aggressively: Linear has repeatedly declined requests to add features that would make it 'more like Jira.' Restraint is a product strategy."
+    ]
+  },
+  {
+    "id": "loom",
+    "name": "Loom",
+    "tagline": "Async video messaging that replaces unnecessary meetings.",
+    "logo": null,
+    "category": "Communication",
+    "region": "global",
+    "founded": "2016",
+    "founders": "Vinay Hiremath, Shahed Khan, Joe Thomas",
+    "hq": "San Francisco, USA",
+    "businessModel": "Freemium SaaS",
+    "problem": "Async communication via text (Slack/email) loses nuance, tone, and context. But scheduling a meeting wastes everyone's time for a 5-minute explanation. There was no middle ground — until Loom created async video that took 30 seconds to record and 3 minutes to watch.",
+    "keyFeatures": [
+      "One-click screen + webcam + audio recording",
+      "Instant shareable link (no download needed for viewer)",
+      "Viewer engagement analytics (watch rate, rewatch)",
+      "Emoji reactions and timestamped comments",
+      "Auto-generated transcripts and captions",
+      "Chrome extension for zero-friction recording"
+    ],
+    "businessModelDetail": "Free (25 videos, 5-min limit); Business ($12.50/creator/mo); Enterprise (custom). Acquired by Atlassian for $975M in 2023.",
+    "growthStory": "Loom's explosive growth came when remote work became mandatory in 2020. What had been a niche async tool suddenly became essential for distributed teams. Loom also benefited from extreme shareability — every Loom video shared externally was a product demo. The Chrome extension's ease of use drove bottom-up adoption. Atlassian's acquisition in 2023 integrated Loom into the Jira/Confluence ecosystem, giving it instant access to millions of enterprise users.",
+    "keyMetrics": ["$975M Atlassian acquisition", "21M+ users", "200M videos recorded", "14M videos recorded in COVID week 1"],
+    "pmLessons": [
+      "Solve the meeting-or-email false dichotomy. Loom's insight was that async video is a third category that's better than either extreme.",
+      "Built-in distribution: Every video Loom sends is a live product demo. Designing for shareability is a growth strategy, not just a UX decision.",
+      "Timing and macro trends: COVID didn't create Loom's category, but it validated it overnight. Being positioned for a macro shift before it happens is a product superpower.",
+      "Engagement metrics as a feature: Showing creators who watched and for how long closed the async communication loop and made Loom feel accountable.",
+      "Chrome extension strategy: Zero-friction capture (no app switch, no download) was the key to daily habit formation."
+    ]
+  }
+]

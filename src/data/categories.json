@@ -1,0 +1,31 @@
+{
+  "newsCategories": [
+    { "id": "all", "label": "All", "icon": "🌐" },
+    { "id": "strategy", "label": "Strategy", "icon": "♟️" },
+    { "id": "growth", "label": "Growth", "icon": "📈" },
+    { "id": "ux", "label": "UX & Design", "icon": "🎨" },
+    { "id": "ai", "label": "AI in Product", "icon": "🤖" },
+    { "id": "career", "label": "Career & Culture", "icon": "💼" }
+  ],
+  "productCategories": [
+    { "id": "all", "label": "All" },
+    { "id": "B2B SaaS", "label": "B2B SaaS" },
+    { "id": "Consumer App", "label": "Consumer App" },
+    { "id": "Platform", "label": "Platform" },
+    { "id": "Fintech", "label": "Fintech" },
+    { "id": "E-Commerce", "label": "E-Commerce" },
+    { "id": "Quick Commerce", "label": "Quick Commerce" },
+    { "id": "Marketplace", "label": "Marketplace" },
+    { "id": "Productivity", "label": "Productivity" },
+    { "id": "Design Tools", "label": "Design Tools" },
+    { "id": "Communication", "label": "Communication" }
+  ],
+  "drillTypes": [
+    { "id": "all", "label": "All" },
+    { "id": "guesstimate", "label": "Guesstimate", "icon": "📊", "color": "#7C3AED" },
+    { "id": "rca", "label": "RCA", "icon": "🕵️", "color": "#EF4444" },
+    { "id": "metrics", "label": "Metrics", "icon": "📈", "color": "#10B981" },
+    { "id": "framework", "label": "Framework", "icon": "🗺️", "color": "#3B82F6" },
+    { "id": "case-study", "label": "Case Study", "icon": "🏢", "color": "#F59E0B" }
+  ]
+}

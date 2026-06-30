@@ -1,0 +1,302 @@
+[
+  {
+    "id": "dc-001",
+    "type": "guesstimate",
+    "difficulty": "medium",
+    "topic": "Market Sizing",
+    "question": "How many cups of chai are consumed in India every day?",
+    "answer": "India has ~1.4B people. ~70% are regular chai drinkers ≈ 980M people. Average 2 cups/day = ~2 billion cups/day. Street vendors + home brewing + office supply all included. Cross-check: India produces ~1.35M tonnes of tea/year. ~80% consumed domestically ≈ 1.08M tonnes → ~3M tonnes/day → ~2B cups. ✅ Estimate: ~2 Billion cups/day.",
+    "hint": "Think about the population, % who drink chai, and cups per person per day.",
+    "tags": ["market-sizing", "india", "consumer"]
+  },
+  {
+    "id": "dc-002",
+    "type": "rca",
+    "difficulty": "hard",
+    "topic": "Metric Drop",
+    "question": "Swiggy's Daily Active Users dropped 18% last Monday. What's your root cause analysis?",
+    "answer": "Frame with a hypothesis tree:\n\n**External:** Payment gateway outage? Competitor promotion (Zomato discount)? Public holiday with fewer offices open?\n\n**Internal:** App crash / bug in latest release? Push notification failure? Listing quality drop (restaurant offline)?\n\n**Data:** Is the DAU metric correct? Timezone bug? Tracking script failure?\n\nPrioritize by checking: (1) Error rates in Datadog, (2) Release log for Monday, (3) Payment success rate, (4) Competitor social media. Monday drops often = weekend carryover + corporate user base down.",
+    "hint": "Split into: External factors, Internal product issues, and Data/tracking errors.",
+    "tags": ["rca", "metrics", "food-tech"]
+  },
+  {
+    "id": "dc-003",
+    "type": "metrics",
+    "difficulty": "easy",
+    "topic": "North Star Metric",
+    "question": "What should be the North Star Metric for Spotify?",
+    "answer": "**Best choice: Time Spent Listening per User per Month**\n\nWhy: Captures both breadth (# sessions) and depth (engagement). Correlates with retention, ad revenue, and premium conversion.\n\n**Alternatives considered:**\n- MAU → too top-of-funnel, doesn't show engagement\n- Streams per day → misses session quality\n- Premium subscribers → misses free tier health\n\n**Supporting metrics:** Playlist saves, Podcast completion rate, Daily Listener rate.\n\nNorth Star = metric that best captures the value users get AND predicts long-term revenue.",
+    "hint": "Think about what value Spotify delivers to users and what behavior predicts retention.",
+    "tags": ["north-star", "streaming", "engagement"]
+  },
+  {
+    "id": "dc-004",
+    "type": "framework",
+    "difficulty": "medium",
+    "topic": "Prioritization",
+    "question": "Your team has 20 feature requests. Walk me through how you'd prioritize them.",
+    "answer": "Use a structured framework:\n\n**1. RICE Scoring**\n- Reach × Impact × Confidence ÷ Effort\n- Score each feature objectively\n\n**2. Categorize by type**\n- Must-haves (contractual, security, legal)\n- Quick wins (high impact, low effort)\n- Strategic bets (high effort, high payoff)\n- Nice-to-haves (low impact, defer)\n\n**3. Align with strategy**\n- Does it support company OKRs this quarter?\n- Does it address retention or acquisition goals?\n\n**4. Stakeholder input**\n- Sales pipeline urgency, customer support volume, NPS feedback\n\n**5. Ship it**\n- Lock sprint, communicate trade-offs clearly.",
+    "hint": "Use RICE or ICE scoring. Always tie back to company OKRs.",
+    "tags": ["prioritization", "frameworks", "rice"]
+  },
+  {
+    "id": "dc-005",
+    "type": "case-study",
+    "difficulty": "hard",
+    "topic": "Product Strategy",
+    "question": "You're the PM of Google Maps. How do you increase revenue without degrading user experience?",
+    "answer": "**Revenue levers for Google Maps:**\n\n1. **B2B APIs (current):** Raise pricing tiers, add enterprise SLAs, geospatial AI features for business clients.\n\n2. **Local Ads (enhance):** Promoted pins with better targeting (time-of-day, intent-based). Native, non-intrusive.\n\n3. **Booking & Transactions:** Google Reserve expansion — restaurant reservations, EV charging bookings, parking payments.\n\n4. **Data Licensing:** Anonymized foot-traffic data to retailers and city planners.\n\n5. **Maps for Commerce:** Enable product discovery (\"find this shoe near me\") with affiliate commission.\n\n**UX Guard-rails:** No interstitials. Promoted results clearly labeled. Relevance score gates ad placement. User can always close ads.",
+    "hint": "Think B2B APIs, local advertising, transactions, and data licensing.",
+    "tags": ["strategy", "monetization", "google"]
+  },
+  {
+    "id": "dc-006",
+    "type": "guesstimate",
+    "difficulty": "easy",
+    "topic": "Market Sizing",
+    "question": "How many WhatsApp messages are sent in India per day?",
+    "answer": "India: ~500M WhatsApp users. Average user sends ~40 messages/day (mix of personal, group, business). 500M × 40 = **20 Billion messages/day**.\n\nCross-check: WhatsApp reported 100B messages/day globally. India is ~25-30% of users → 25-30B. Estimate aligns. ✅ ~20-25 Billion messages/day.",
+    "hint": "Start with active users in India, then estimate messages per person per day.",
+    "tags": ["market-sizing", "india", "messaging"]
+  },
+  {
+    "id": "dc-007",
+    "type": "rca",
+    "difficulty": "medium",
+    "topic": "Metric Drop",
+    "question": "Your app's checkout conversion rate dropped from 72% to 58% after last week's release. How do you debug this?",
+    "answer": "**Step 1: Confirm the data**\nIs the metric being calculated the same way? Any tracking changes in the release?\n\n**Step 2: Segment the drop**\n- By platform (iOS vs Android vs Web)\n- By device type, OS version\n- By payment method\n- By user cohort (new vs returning)\n\n**Step 3: Funnel analysis**\nWhere in checkout did users drop?\n- Cart → Address → Payment → OTP → Confirm\n\n**Step 4: What changed in the release?**\n- New UI? Checkout flow redesign? New payment gateway integration?\n- Check error logs for payment failures\n\n**Step 5: Fix**\n- Feature flag rollback if isolated to new code\n- Hot-fix for critical payment errors",
+    "hint": "Check data integrity first, then segment by platform/payment method, then trace the funnel.",
+    "tags": ["rca", "conversion", "checkout"]
+  },
+  {
+    "id": "dc-008",
+    "type": "metrics",
+    "difficulty": "medium",
+    "topic": "Activation",
+    "question": "Define 3 key activation metrics for a B2B SaaS product like Slack.",
+    "answer": "**Activation = when a user first experiences core value.**\n\n**For Slack:**\n\n1. **Messages sent in first 7 days** — Target: >50 messages. Predicts 30-day retention strongly.\n\n2. **Team invited within 48 hours** — Slack is collaborative; solo users have near-zero retention. If a user invites 2+ teammates, retention doubles.\n\n3. **Channel created in week 1** — Shows the user has organized their workspace = deeper product adoption.\n\n**Why these?** Each metric represents a step toward the 'aha moment' — the moment the user feels Slack is indispensable. Activation metrics should be leading indicators of retention.",
+    "hint": "Activation = first value moment. Think about what action signals a user 'got it'.",
+    "tags": ["activation", "b2b-saas", "retention"]
+  },
+  {
+    "id": "dc-009",
+    "type": "framework",
+    "difficulty": "easy",
+    "topic": "Problem Discovery",
+    "question": "How do you run a great user interview to discover pain points?",
+    "answer": "**5 rules for great user interviews:**\n\n1. **Ask about past behavior, not future intent.** \"Tell me about the last time you…\" not \"Would you use a feature that…\"\n\n2. **Follow the emotion.** When they sigh, hesitate, or get excited — dig deeper. \"Tell me more about that.\"\n\n3. **Never pitch solutions.** Your job is to understand the problem, not validate your idea.\n\n4. **Five Whys.** Surface level = symptom. Keep asking 'why' to find root cause.\n\n5. **Silence is data.** Let pauses breathe — users fill silence with honest thoughts.\n\n**Structure:** Warm-up → Context → Main problem area → Wrap-up (5-6 open questions total). 30-45 min sessions work best.",
+    "hint": "Focus on past behavior, emotional signals, and Five Whys technique.",
+    "tags": ["user-research", "interviews", "discovery"]
+  },
+  {
+    "id": "dc-010",
+    "type": "case-study",
+    "difficulty": "medium",
+    "topic": "Feature Design",
+    "question": "Design a 'Study Mode' for YouTube to help students focus without distractions.",
+    "answer": "**Problem:** Students use YouTube for learning but get distracted by recommendations and Shorts.\n\n**Solution: YouTube Study Mode**\n\n**Core Features:**\n- Hide Shorts, recommendations, comments (toggleable)\n- Pomodoro timer overlay (25 min focus + 5 min break)\n- Bookmark chapters with personal notes\n- Playlist-only mode: only your study playlist plays\n- Distraction score report at end of session\n\n**Success Metrics:**\n- Session length in Study Mode vs. regular\n- Return rate (do students come back?)\n- NPS from edu segment\n\n**Guardrails:**\n- No degradation to ad revenue (Study Mode shows non-intrusive ads)\n- Opt-in only — don't change default experience\n\n**Go-to-market:** Partner with BYJU'S, Unacademy playlists for India launch.",
+    "hint": "Think about what distracts students, then remove those distractions while preserving learning value.",
+    "tags": ["feature-design", "education", "youtube"]
+  },
+  {
+    "id": "dc-011",
+    "type": "guesstimate",
+    "difficulty": "hard",
+    "topic": "Market Sizing",
+    "question": "Estimate the revenue of Zomato Gold (membership program) per year.",
+    "answer": "Zomato MAU: ~18M in India. Gold adoption: ~10-15% of MAU = ~2M subscribers. Price: ₹149/month or ₹799/year. Assume 60% annual, 40% monthly.\n\n- Annual: 1.2M × ₹799 = ₹958M\n- Monthly: 0.8M × ₹149 × 12 = ₹1,430M\n- Total ≈ **₹2,400 Crore/year** (~₹2.4B)\n\nZomato reported Blinkit + Gold growing, so this is ballpark. Real figure likely ₹1,000-1,500 Cr as churn is high in subscription food.",
+    "hint": "Start with Zomato MAU, estimate Gold adoption %, then multiply by subscription price.",
+    "tags": ["market-sizing", "subscription", "food-tech"]
+  },
+  {
+    "id": "dc-012",
+    "type": "rca",
+    "difficulty": "hard",
+    "topic": "Retention Drop",
+    "question": "D30 retention for your mobile game dropped from 28% to 19% in 6 weeks. What's your investigation plan?",
+    "answer": "**Investigation Framework:**\n\n**1. Cohort Analysis**\nIs it all cohorts or just recent ones? If only new cohorts → onboarding problem or acquisition quality change.\n\n**2. Funnel Drop-off**\nAt which day do users churn? Day 1, 3, 7, or 14 → different root causes.\n\n**3. Acquisition Source**\n6 weeks ago = did a new ad campaign start? New users from paid ads often have lower intent.\n\n**4. In-game Changes**\nNew difficulty spike? Economy rebalance? Level added that increased friction?\n\n**5. External**\nCompetitor launch? New iOS/Android update breaking something?\n\n**Hypotheses to test:**\n- New user acquisition changed composition (lower quality traffic)\n- Difficulty spike at level 10 added 6 weeks ago\n- Notification opt-in changes reduced re-engagement\n\n**Fix priority:** Adjust difficulty → add re-engagement push → improve onboarding clarity.",
+    "hint": "Separate cohorts first — is this a new user problem or happening to existing users too?",
+    "tags": ["retention", "gaming", "rca"]
+  },
+  {
+    "id": "dc-013",
+    "type": "metrics",
+    "difficulty": "easy",
+    "topic": "Engagement",
+    "question": "What metrics would you use to measure the health of a social feed (like Instagram's main feed)?",
+    "answer": "**Consumption Metrics:**\n- Scroll depth per session\n- Posts seen per session\n- Time spent in feed per DAU\n\n**Engagement Metrics:**\n- Like rate (likes/impressions)\n- Comment rate\n- Share/Save rate (highest intent signal)\n- DM sends from feed\n\n**Creator Health (supply side):**\n- # active creators posting per week\n- Creator retention month-over-month\n\n**Negative Signals (equally important):**\n- Unfollow rate after feed session\n- Report/hide rate\n- App uninstalls correlated with feed sessions\n\n**North Star for feed:** 'Satisfying sessions per DAU' — sessions where user engaged with ≥2 posts.",
+    "hint": "Think consumption, engagement, creator health, AND negative signals.",
+    "tags": ["social", "feed", "engagement-metrics"]
+  },
+  {
+    "id": "dc-014",
+    "type": "framework",
+    "difficulty": "medium",
+    "topic": "Go-to-Market",
+    "question": "You're launching a new productivity app in India. Walk me through your GTM strategy.",
+    "answer": "**GTM Framework for Indian Market:**\n\n**1. Target Segment (ICP)**\nWho is the early adopter? Tier-1 city knowledge workers, English-proficient, aged 22-35, already using Notion/Todoist.\n\n**2. Value Proposition**\nOne clear sentence: \"The fastest way to turn your WhatsApp notes into structured tasks.\"\n\n**3. Channels**\n- LinkedIn thought leadership (founders, product folks)\n- ProductHunt launch\n- Twitter/X niche communities (#buildinpublic)\n- YouTube demo video (Hindi + English)\n- College ambassador program (IITs, NITs)\n\n**4. Pricing**\nFreemium first. ₹199/month pro. Annual plan (₹999) for cashflow.\n\n**5. Metrics**\n- Week 1: 1,000 signups\n- Week 4: 100 paying users\n- Month 3: NPS > 40",
+    "hint": "Cover: Segment → Value prop → Channels → Pricing → Launch metrics.",
+    "tags": ["gtm", "india", "launch"]
+  },
+  {
+    "id": "dc-015",
+    "type": "case-study",
+    "difficulty": "hard",
+    "topic": "Product Strategy",
+    "question": "Should PhonePe enter the B2B lending space? Build a case for or against.",
+    "answer": "**Case FOR entering B2B Lending:**\n\n✅ PhonePe has real transaction data on 50Cr+ merchants — strongest underwriting data in India.\n✅ Credit gap: 40M MSMEs in India, 80% underserved by banks.\n✅ Recurring revenue (interest income) vs. one-time UPI revenue.\n✅ ONDC + lending = embedded finance flywheel.\n\n**Risks:**\n❌ Regulatory: RBI NBFC license requirements, FLDG norms changing.\n❌ Credit risk: First lending cycle in downturn could be brutal.\n❌ Focus risk: Distraction from insurance, wealth products already in flight.\n\n**Decision framework:** Enter with a co-lending partnership model first (low capital risk), underwrite using their own transaction data, pilot with 10,000 merchants, measure NPA rates. If NPA <3%, scale with NBFC license.\n\n**Verdict:** Yes — but through co-lending first, not direct lending.",
+    "hint": "Think about their data moat, the credit gap, and regulatory/capital risks.",
+    "tags": ["strategy", "fintech", "india"]
+  },
+  {
+    "id": "dc-016",
+    "type": "guesstimate",
+    "difficulty": "medium",
+    "topic": "Market Sizing",
+    "question": "Estimate the number of Uber rides taken in Mumbai on a weekday.",
+    "answer": "Mumbai population: 20M. Working/commuting population: ~8M. % using Uber on a given day: ~5% (they alternate with autos, local trains, BEST buses) = 400K unique riders. Average rides per person: 1.5 (some do round trips) = **600,000 rides/day**.\n\nCross-check: Uber India reportedly does ~2.5M rides/day across India. Mumbai + Bangalore = ~40% of volume → 1M rides between them → 500-600K in Mumbai alone. ✅ ~600K rides/weekday.",
+    "hint": "Start with working population, estimate Uber adoption rate, then multiply by average rides/person.",
+    "tags": ["market-sizing", "mobility", "mumbai"]
+  },
+  {
+    "id": "dc-017",
+    "type": "rca",
+    "difficulty": "medium",
+    "topic": "Revenue Drop",
+    "question": "Your subscription-based app's MRR dropped 12% month-over-month. Walk me through your analysis.",
+    "answer": "**MRR Drop = New MRR - Churned MRR - Downgraded MRR + Reactivations + Upgrades**\n\n**Step 1: Decompose the drop**\n- Did new subscriptions decline? → Acquisition problem\n- Did churn increase? → Retention problem\n- Did downgrades increase? → Value perception problem\n\n**Step 2: Churn analysis (if that's the issue)**\n- By plan tier (monthly vs annual)\n- By acquisition cohort (did a specific month's users churn more?)\n- By feature usage (churned users — did they use core features?)\n\n**Step 3: Exit survey analysis**\n- Too expensive? Found alternative? Didn't use enough?\n\n**Step 4: Acquisition analysis**\n- Google Ads CPL increase? Organic traffic drop? Referral program stopped?\n\n**Most common culprit:** A competitor launched a free tier, or a seasonal dip in intent.",
+    "hint": "MRR = New - Churned - Downgraded + Reactivated + Upgraded. Decompose each component.",
+    "tags": ["revenue", "subscription", "mrr"]
+  },
+  {
+    "id": "dc-018",
+    "type": "metrics",
+    "difficulty": "hard",
+    "topic": "Marketplace",
+    "question": "What are the key health metrics for a two-sided marketplace like Meesho?",
+    "answer": "**Supply Side (Sellers):**\n- # Active sellers (listed product in last 30 days)\n- Seller NPS\n- Average GMV per seller\n- Seller churn rate\n- Time to first order (activation)\n\n**Demand Side (Buyers):**\n- Purchase frequency per buyer per month\n- Repeat purchase rate (RCB — returning customer %)\n- Cart abandonment rate\n- Average Order Value (AOV)\n- GMV per DAU\n\n**Marketplace Health:**\n- Take rate (revenue / GMV)\n- Liquidity: % of listings that get at least 1 order/week\n- Supply-demand ratio per category\n- Return rate (high returns = quality issue)\n\n**North Star:** **GMV × Liquidity** — not just GMV alone, which can be inflated by few large sellers.",
+    "hint": "Cover both sides: supply (seller health) and demand (buyer behavior) + marketplace liquidity.",
+    "tags": ["marketplace", "meesho", "two-sided"]
+  },
+  {
+    "id": "dc-019",
+    "type": "framework",
+    "difficulty": "hard",
+    "topic": "Trade-off Decision",
+    "question": "How do you decide whether to build a feature in-house vs. buy a third-party solution?",
+    "answer": "**Build vs Buy vs Partner Framework:**\n\n**Build when:**\n- It's a core competency / competitive differentiator\n- No adequate solution exists in market\n- You need deep customization\n- Long-term TCO of building < buying\n\n**Buy when:**\n- Commodity functionality (payments, auth, email)\n- Time-to-market is critical\n- Vendor has deep domain expertise\n- Switching costs are low enough later\n\n**Partner when:**\n- Distribution is the goal, not the tech\n- Data sharing creates mutual value\n- Regulatory complexity makes full ownership risky\n\n**Decision matrix:**\n| Factor | Weight | Build | Buy |\n|---|---|---|---|\n| Strategic value | 40% | High | Low |\n| Time-to-market | 30% | Slow | Fast |\n| Cost (3yr TCO) | 20% | Varies | Predictable |\n| Risk | 10% | High | Low |\n\nAlways pilot before fully committing to either path.",
+    "hint": "Ask: Is this core to our differentiation? What's the 3-year TCO? How fast do we need it?",
+    "tags": ["build-vs-buy", "strategy", "decision-making"]
+  },
+  {
+    "id": "dc-020",
+    "type": "case-study",
+    "difficulty": "medium",
+    "topic": "Feature Design",
+    "question": "Design a 'Squad Goals' feature for a fitness app like HealthifyMe to improve retention.",
+    "answer": "**Problem:** Solo fitness journeys have low long-term retention. Social accountability = better habit formation.\n\n**Feature: Squad Goals**\n\n**Core flow:**\n1. User creates or joins a Squad (2-5 people)\n2. Set a shared weekly goal (e.g., 10,000 steps/day, 3 workouts/week)\n3. Progress visible on shared leaderboard\n4. Celebration notifications when anyone achieves goal\n5. Squad chat for motivation\n\n**Mechanics:**\n- Nudge to add friend on Day 3 (after solo habit formed)\n- Weekly Squad report card (emoji-rich, shareable)\n- Loss aversion: \"Your squad needs you — you haven't logged today\"\n\n**Success metrics:**\n- D30 retention: Squad users vs solo (target: +15%)\n- Sessions/week for squad users\n- Squad creation rate in first week\n\n**Guardrails:** Don't shame — keep tone positive. Opt-out of notifications easily.",
+    "hint": "Use social accountability mechanics. Think about the retention loop and measurement.",
+    "tags": ["retention", "social", "fitness"]
+  },
+  {
+    "id": "dc-021",
+    "type": "guesstimate",
+    "difficulty": "hard",
+    "topic": "Unit Economics",
+    "question": "Estimate the CAC (Customer Acquisition Cost) for a neobank in India targeting millennials.",
+    "answer": "**Channels and cost estimates:**\n\n- Digital ads (Meta/Google): ₹200 CPC, 2% conversion to app install, 20% complete KYC = ₹5,000 CAC from ads\n- Referral program: ₹300 reward, 40% referral signup rate = ₹750 CAC\n- Influencer marketing: ₹50L/campaign, 10K sign-ups = ₹500 CAC\n- Organic/word of mouth: ₹0 variable cost (amortize team salary)\n\n**Blended CAC (40% ads, 30% referral, 20% influencer, 10% organic):**\n= 0.4×₹5000 + 0.3×₹750 + 0.2×₹500 + 0.1×₹100\n= ₹2000 + ₹225 + ₹100 + ₹10 = **~₹2,335 blended CAC**\n\nReal neobanks in India report ₹500-₹1,500 CAC at scale with referrals dominant. Early-stage closer to ₹2,000-3,000.",
+    "hint": "Think about each acquisition channel, its conversion rate, and then blend by channel mix.",
+    "tags": ["unit-economics", "fintech", "cac"]
+  },
+  {
+    "id": "dc-022",
+    "type": "rca",
+    "difficulty": "easy",
+    "topic": "Engagement Drop",
+    "question": "Daily active users on your news app increased 20% but session duration dropped 30%. Is this good or bad?",
+    "answer": "**Needs deeper investigation — could be either.**\n\n**Potentially GOOD if:**\n- Users are finding what they need faster (better search/recommendations)\n- Reduced friction → more frequent but shorter sessions\n- Push notifications are working — bringing users back for quick reads\n- Mobile format shift: users skimming headlines more (common in news)\n\n**Potentially BAD if:**\n- Content quality dropped — users leaving quickly (high bounce rate)\n- App slow/crashing — sessions ending abnormally\n- Wrong users acquired — lower-intent traffic spike\n- Key content type (long-form) removed or buried\n\n**Next steps:**\n1. Check scroll depth and article completion rate\n2. Check pages/session (did users view fewer articles?)\n3. Segment by acquisition source for the new 20% users\n4. Check bounce rate and exit page analysis\n\n**Verdict:** Track 'articles read per session' as the tie-breaker metric.",
+    "hint": "More users + shorter sessions can mean better UX OR worse content. Dig into article completion rate.",
+    "tags": ["rca", "engagement", "news"]
+  },
+  {
+    "id": "dc-023",
+    "type": "metrics",
+    "difficulty": "medium",
+    "topic": "Growth",
+    "question": "How would you measure the success of a referral program?",
+    "answer": "**Primary Metrics:**\n\n1. **K-factor (Viral coefficient):** (Invitations sent per user) × (Invitation conversion rate). K > 1 = viral growth. Aim for K = 0.5+ as a meaningful contributor.\n\n2. **Referral CAC vs. Paid CAC:** Referral users should cost 60-80% less than paid. If not, the incentive is too high.\n\n3. **Referral conversion rate:** % of invited users who sign up AND activate (not just sign up).\n\n**Quality Metrics (often missed):**\n\n4. **Referred user LTV vs. organic user LTV:** Referred users should have higher LTV (trust transfer). If not, referral program attracts incentive hunters.\n\n5. **D30 retention of referred users:** Are they sticking around after the reward?\n\n**Health Check:**\n- Fraud rate (fake referrals, self-referrals)\n- % of total new users from referrals (target: 20-30% for healthy programs)",
+    "hint": "Go beyond K-factor — measure quality of referred users, not just volume.",
+    "tags": ["growth", "referral", "viral"]
+  },
+  {
+    "id": "dc-024",
+    "type": "framework",
+    "difficulty": "easy",
+    "topic": "Requirements",
+    "question": "How do you write a great Product Requirements Document (PRD)?",
+    "answer": "**Anatomy of a great PRD:**\n\n**1. Problem Statement**\nWho is the user? What's the pain? What's the size of the problem? Back with data.\n\n**2. Goals & Non-goals**\nClear OKR alignment. Explicitly list what you're NOT building (prevents scope creep).\n\n**3. User Stories**\n'As a [user], I want to [action] so that [benefit].' 5-8 stories max.\n\n**4. Functional Requirements**\nMust-have (P0), Should-have (P1), Nice-to-have (P2). Be specific.\n\n**5. Success Metrics**\nPrimary metric + guardrail metrics. How will you know it worked?\n\n**6. Design & Technical Notes**\nLink to Figma. Note API constraints, edge cases.\n\n**7. Launch Plan**\nRollout %, feature flags, comms plan.\n\n**Rule:** A PRD should answer: What problem? Why now? How do we measure success? — in one read.",
+    "hint": "Cover: Problem → Goals → User stories → Requirements → Metrics → Launch plan.",
+    "tags": ["prd", "documentation", "process"]
+  },
+  {
+    "id": "dc-025",
+    "type": "case-study",
+    "difficulty": "easy",
+    "topic": "Improvement",
+    "question": "How would you improve the onboarding of Notion for a first-time user?",
+    "answer": "**Current Problems with Notion Onboarding:**\n- Blank canvas is overwhelming (infinite possibilities = decision paralysis)\n- Jargon: 'Blocks', 'Databases', 'Views' without context\n- No clear 'aha moment' path for different user types\n\n**Improved Onboarding:**\n\n**1. Role-based entry:** \"I'm a Student / Freelancer / Team Lead\" → tailored template suggested immediately.\n\n**2. Template-first:** Don't show blank page. Show a pre-filled template they can edit. First edit = first aha moment.\n\n**3. Progressive disclosure:** Hide advanced features (linked databases, formulas) until user completes basic tasks.\n\n**4. Checklist gamification:** \"3/5 steps to your first workspace\" — completion drives activation.\n\n**5. Social proof:** Show \"15M+ people use this template\" to reduce doubt.\n\n**Success metric:** % of users who create a 2nd page in week 1 (proxy for 'got it' moment).",
+    "hint": "Identify the biggest confusion points, then think about templates, role segmentation, and progressive disclosure.",
+    "tags": ["onboarding", "notion", "ux"]
+  },
+  {
+    "id": "dc-026",
+    "type": "guesstimate",
+    "difficulty": "medium",
+    "topic": "Market Sizing",
+    "question": "How many people in India use a VPN daily?",
+    "answer": "India internet users: ~700M. Adults with smartphones capable of VPN: ~400M. % aware of VPNs: ~20% = 80M. % who actively use: ~5-8% of internet users = 35-56M.\n\nContext: India had 270M VPN downloads in 2022 (per App Annie, before VPN ban push). Daily active = ~10-15% of installed base = **27-40M daily VPN users**.\n\nEstimate: **~30-35 Million daily VPN users in India.**",
+    "hint": "Think about internet users, VPN awareness, and % who actually use it regularly.",
+    "tags": ["market-sizing", "india", "tech"]
+  },
+  {
+    "id": "dc-027",
+    "type": "rca",
+    "difficulty": "hard",
+    "topic": "Supply Drop",
+    "question": "The supply of available drivers on your ride-hailing app dropped 25% in Bangalore last week. RCA?",
+    "answer": "**Supply drop = drivers offline OR drivers on competitor platform**\n\n**Hypothesis 1: Competitor incentive**\nOla/Rapido running a driver promotion? Drivers chasing surge on competing apps.\n\n**Hypothesis 2: Driver earnings fell**\nRecent pricing change? Increased fuel prices? Commission structure changed?\n\n**Hypothesis 3: External event**\nBangalore auto strike? Government crackdown on aggregator vehicles? Local festival?\n\n**Hypothesis 4: Seasonal pattern**\nIs last week historically low? Compare to same week last year.\n\n**Hypothesis 5: App issue**\nDid driver app crash? Payment disbursement delayed? Drivers getting errors?\n\n**Investigation:**\n1. Check driver app crash logs\n2. Call sample of offline drivers (qualitative)\n3. Check payment disbursement reports\n4. Monitor Ola/Rapido driver forums for promo announcements\n\n**Fix:** Emergency incentive boost + driver comms within 48 hours.",
+    "hint": "Think: are drivers on a competitor, offline due to policy change, or is this seasonal/external?",
+    "tags": ["rca", "marketplace", "supply"]
+  },
+  {
+    "id": "dc-028",
+    "type": "metrics",
+    "difficulty": "hard",
+    "topic": "Product Health",
+    "question": "Design a product health dashboard for a mobile banking app. What metrics would you show?",
+    "answer": "**Tier 1 — Business Vitals (CEO level):**\n- MAU / DAU ratio (stickiness)\n- Total transactions (TPV - Total Payment Volume)\n- Revenue (fee income + interest income)\n- Customer NPS\n\n**Tier 2 — Product Health (PM level):**\n- Login success rate (target >99.5%)\n- Transaction success rate (target >99.8%)\n- Avg app load time\n- Crash-free session rate\n- Feature adoption rates (investments, FD, bill pay)\n\n**Tier 3 — Customer Journey:**\n- KYC completion rate for new users\n- D7 / D30 retention\n- Monthly active transacting users\n- Support ticket rate (tickets per 1000 MAU)\n\n**Tier 4 — Risk:**\n- Fraud rate (flagged transactions)\n- Failed login rate (could indicate brute force)\n- Unusual transaction patterns\n\n**Dashboard design:** Tier 1 always visible. Tier 2 one click deep. Alerts for any metric moving >5% week-over-week.",
+    "hint": "Think in tiers: business vitals, product health, customer journey, and risk signals.",
+    "tags": ["metrics", "dashboard", "fintech"]
+  },
+  {
+    "id": "dc-029",
+    "type": "framework",
+    "difficulty": "medium",
+    "topic": "Experiment Design",
+    "question": "How do you design a proper A/B test to validate a new checkout flow?",
+    "answer": "**A/B Test Design Checklist:**\n\n**1. Hypothesis**\n'If we reduce form fields in checkout from 8 to 4, then checkout completion rate will increase by >5% because cognitive load decreases.'\n\n**2. Metric + Guardrails**\n- Primary: Checkout completion rate\n- Guardrails: Revenue per session (ensure no decrease), time on page, error rate\n\n**3. Sample Size**\nCalculate with: baseline rate (72%), MDE (minimum detectable effect, e.g., +5%), confidence 95%, power 80%. Use a sample size calculator → ~4,000 users per variant.\n\n**4. Randomization**\nRandomize at user ID level, not session level (avoid variant switching). Ensure equal split.\n\n**5. Duration**\nRun for at least 2 full business cycles (2 weeks minimum). Don't stop early.\n\n**6. Analysis**\nTwo-tailed t-test. Check for novelty effect. Segment by device type.\n\n**7. Decision**\nOnly ship if primary metric improves AND guardrails hold.",
+    "hint": "Cover hypothesis, primary metric + guardrails, sample size, randomization, and duration.",
+    "tags": ["experimentation", "ab-testing", "checkout"]
+  },
+  {
+    "id": "dc-030",
+    "type": "case-study",
+    "difficulty": "hard",
+    "topic": "Product Strategy",
+    "question": "CRED is struggling with monetization. If you were the CPO, what would you do?",
+    "answer": "**CRED's Core Problem:** 23M high-credit users = premium audience but hard to monetize directly.\n\n**Revenue Opportunities:**\n\n**1. Lending (highest potential)**\nCRED has credit history data — uniquely positioned. CRED Cash (personal loans) already exists. Expand to: home improvement loans, travel BNPL, co-branded credit cards.\n\n**2. CRED Commerce (Improve)**\nCurrently low-quality burn rate deal site. Shift to: curated luxury e-commerce (premium brands pay premium CPM). Think Nykaa for CRED's audience.\n\n**3. CRED for Business**\nB2B: Expense management for companies. Their audience = salaried professionals. Corporate card + expense tracking = TAM of ₹5L Cr market.\n\n**4. Data/Insights (Ethical)**\nAggregate credit behavior insights for banks, insurance underwriters. Anonymized, opt-in.\n\n**Priority:** Lending > Commerce > B2B\n\n**Risk:** Each has regulatory complexity. Lending = RBI scrutiny. Data = privacy laws.\n\n**North Star KPI shift:** Revenue per user from ₹0 to ₹2,000/year by FY26.",
+    "hint": "Think about their unfair advantage: 23M creditworthy users. What can you sell TO them or ABOUT them (ethically)?",
+    "tags": ["strategy", "monetization", "fintech"]
+  }
+]

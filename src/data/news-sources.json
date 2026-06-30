@@ -1,0 +1,58 @@
+[
+  {
+    "id": "lenny",
+    "name": "Lenny's Newsletter",
+    "url": "https://www.lennysnewsletter.com/feed",
+    "category": "Strategy",
+    "categoryId": "strategy"
+  },
+  {
+    "id": "productboard",
+    "name": "Productboard Blog",
+    "url": "https://www.productboard.com/blog/feed/",
+    "category": "Product",
+    "categoryId": "product"
+  },
+  {
+    "id": "mindtheproduct",
+    "name": "Mind the Product",
+    "url": "https://www.mindtheproduct.com/feed/",
+    "category": "Product",
+    "categoryId": "product"
+  },
+  {
+    "id": "techcrunch",
+    "name": "TechCrunch",
+    "url": "https://techcrunch.com/feed/",
+    "category": "Tech",
+    "categoryId": "tech"
+  },
+  {
+    "id": "hbr",
+    "name": "HBR Idea Watch",
+    "url": "https://feeds.hbr.org/harvardbusiness",
+    "category": "Strategy",
+    "categoryId": "strategy"
+  },
+  {
+    "id": "product-hunt",
+    "name": "Product Hunt",
+    "url": "https://www.producthunt.com/feed",
+    "category": "Product",
+    "categoryId": "product"
+  },
+  {
+    "id": "firstround",
+    "name": "First Round Review",
+    "url": "https://review.firstround.com/rss.xml",
+    "category": "Growth",
+    "categoryId": "growth"
+  },
+  {
+    "id": "stratechery",
+    "name": "Stratechery",
+    "url": "https://stratechery.com/feed/",
+    "category": "Strategy",
+    "categoryId": "strategy"
+  }
+]
