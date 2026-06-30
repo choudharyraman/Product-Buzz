@@ -1,7 +1,9 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+
 
 const NAV_ITEMS = [
   { icon: '🏠', label: 'Home',       href: '/dashboard' },
@@ -16,8 +18,19 @@ const ACCOUNT_ITEMS = [
   { icon: '⚙️', label: 'Settings', href: '/settings' },
 ];
 
-export default function Sidebar({ user = null, streak = 7 }) {
+export default function Sidebar({ user = null }) {
   const pathname = usePathname();
+  const [localStreak, setLocalStreak] = useState(0);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('pm-drill-streak');
+    if (stored) {
+      setLocalStreak(parseInt(stored, 10));
+    } else {
+      localStorage.setItem('pm-drill-streak', '0');
+      setLocalStreak(0);
+    }
+  }, []);
 
   const isActive = (href) => {
     if (href === '/dashboard') return pathname === '/dashboard' || pathname === '/';
@@ -83,7 +96,7 @@ export default function Sidebar({ user = null, streak = 7 }) {
                 {user?.name ?? 'PM Learner'}
               </span>
               <span className="text-xs" style={{ color: 'var(--warm)' }}>
-                Streak: {streak} days 🔥
+                Streak: {localStreak} days 🔥
               </span>
             </div>
           </div>

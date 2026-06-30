@@ -1,6 +1,17 @@
 'use client';
 
-export default function TopBar({ title = 'Product Buzz', streak = 0 }) {
+import { useState, useEffect } from 'react';
+
+export default function TopBar({ title = 'Product Buzz' }) {
+  const [localStreak, setLocalStreak] = useState(0);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('pm-drill-streak');
+    if (stored) {
+      setLocalStreak(parseInt(stored, 10));
+    }
+  }, []);
+
   return (
     <header className="app-topbar" aria-label="Top bar">
       {/* Logo mark */}
@@ -15,10 +26,11 @@ export default function TopBar({ title = 'Product Buzz', streak = 0 }) {
       </h1>
 
       {/* Streak badge */}
-      <div className="streak-counter" role="status" aria-label={`Streak: ${streak} days`}>
+      <div className="streak-counter" role="status" aria-label={`Streak: ${localStreak} days`}>
         <span aria-hidden="true">🔥</span>
-        <span>{streak}d</span>
+        <span>{localStreak}d</span>
       </div>
     </header>
   );
 }
+
