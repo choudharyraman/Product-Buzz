@@ -26,6 +26,27 @@ export async function GET(request) {
     );
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
+      const flow = searchParams.get('flow');
+      
+      if (flow === 'login') {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          // Check if profile exists and wasn't just created (within last 10 seconds)
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('created_at')
+            .eq('id', user.id)
+            .single();
+            
+          const isNewUser = !profile || (new Date() - new Date(profile.created_at) < 10000);
+          if (isNewUser) {
+            // Delete user or just sign out and redirect to sign up
+            await supabase.auth.signOut();
+            return NextResponse.redirect(`${origin}/login?error=account_not_found`);
+          }
+        }
+      }
+      
       return NextResponse.redirect(`${origin}${next}`);
     }
   }

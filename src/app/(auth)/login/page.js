@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
@@ -12,6 +12,16 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const urlError = params.get('error');
+    if (urlError === 'account_not_found') {
+      setError('No account found with this Google profile. Please Sign Up first!');
+    } else if (urlError === 'auth_callback_failed') {
+      setError('Google authentication failed. Please try again.');
+    }
+  }, []);
+
   const handleGoogleSignIn = async () => {
     setIsLoading(true);
     setError('');
@@ -20,7 +30,7 @@ export default function LoginPage() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/api/auth/callback`,
+          redirectTo: `${window.location.origin}/api/auth/callback?flow=login`,
         },
       });
       if (error) setError(error.message);
