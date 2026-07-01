@@ -1,525 +1,462 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 
-const topBriefs = [
-  { category: 'AI INTEGRATION', title: 'OpenAI unveils agent tools', desc: 'New APIs allow systems to execute tasks autonomously.', image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=150' },
-  { category: 'M&A UPDATE', title: 'Figma acquires design startup', desc: 'Strategic deal aims to bolster collaborative whiteboard features.', image: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&fit=crop&q=80&w=150' },
-  { category: 'REGULATION', title: 'EU tightens tech privacy rules', desc: 'Strict compliance audits target digital market platforms.', image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=150' },
-  { category: 'STRATEGY', title: 'Netflix expands gaming tier', desc: 'Mobile catalog grows as retention-boosting strategy.', image: 'https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&q=80&w=150' },
-  { category: 'FINTECH', title: 'Stripe hits valuation record', desc: 'Global digital transactions surge past projection marks.', image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&q=80&w=150' },
-];
-
-const sidebarShorts = [
-  { title: 'CAGR Explained', desc: 'Compound Annual Growth Rate represents the smoothed annual rate of product growth over time.' },
-  { title: 'North Star Metric', desc: 'The single key metric that best captures the core value your product delivers to its customers.' },
-  { title: 'Cohort Retention', desc: 'Tracking user behavior over time to see what percentage return in subsequent weeks.' },
-  { title: 'ARPU Pivot', desc: 'Average Revenue Per User. Crucial for understanding monetization growth curves.' },
-  { title: 'LTV/CAC Ratio', desc: 'Life-Time Value vs Customer Acquisition Cost. Ideal product health ratio is 3:1.' },
-];
-
-const trendingProducts = [
-  { rank: '1', category: 'Foodtech / Delivery', title: 'Zomato', desc: 'Decoding unit economics of India\'s dominant delivery network.', readTime: '5 min read' },
-  { rank: '2', category: 'Fintech / Payments', title: 'Paytm', desc: 'Understanding soundbox monetization & lending pivot.', readTime: '6 min read' },
-  { rank: '3', category: 'Fintech / Rewards', title: 'CRED', desc: 'How premium rewards drive high-value card spending.', readTime: '4 min read' },
-  { rank: '4', category: 'DevTools / SaaS', title: 'Postman', desc: 'How a simple helper became a global API standard.', readTime: '7 min read' },
-  { rank: '5', category: 'E-Commerce / Social', title: 'Meesho', desc: 'Unpacking the zero-commission marketplace model.', readTime: '5 min read' },
-];
-
-const insights = [
+const features = [
   {
-    category: 'Strategy',
-    title: 'The Post-Feature Era: Why Product Value Resides in Ecosystems, Not Capabilities.',
-    desc: 'In a landscape saturated with feature parity, leading product organizations are shifting their focus from shipping capabilities to orchestrating holistic, interconnected ecosystems.',
-    author: 'Elena Rostova',
-    readTime: '8 min read',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=600'
+    icon: '📰',
+    label: 'The Hub',
+    title: 'Global PM Intelligence',
+    desc: 'Live-curated news from the top PM publications. Strategy, growth, UX, and AI — all in one feed.',
+    accent: '#7C3AED',
   },
   {
-    category: 'Growth',
-    title: 'Decoding the Viral Loop: Metrics That Matter.',
-    desc: 'Viral coefficients, cohort retention curves, and sharing triggers. Why most viral features fail and how to build growth engines that stick.',
-    author: 'Marcus Vance',
-    readTime: '6 min read',
-    image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=600'
+    icon: '🃏',
+    label: 'PM Drill',
+    title: 'Your Daily 5-Min Workout',
+    desc: 'Guesstimates, root-cause analyses, metric formulas. Swipe right when you\'ve got it. Build the habit.',
+    accent: '#F59E0B',
   },
   {
-    category: 'UX Design',
-    title: 'Spatial Computing: Designing for the Z-Axis.',
-    desc: 'As hardware catches up to imagination, product designers must rethink interactions beyond flat screens, embracing depth and proximity.',
-    author: 'David Chen',
-    readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?auto=format&fit=crop&q=80&w=600'
-  }
+    icon: '📚',
+    label: 'Dictionary',
+    title: '200 Products Decoded',
+    desc: 'Top 100 global + top 100 Indian products. Business model, growth story, PM lessons — one click away.',
+    accent: '#10B981',
+  },
+  {
+    icon: '🤖',
+    label: 'Buzz AI',
+    title: 'Your Personal PM Coach',
+    desc: 'Powered by Gemini. Ask it to quiz you, explain frameworks, or help you crack that PM interview.',
+    accent: '#6366F1',
+  },
+];
+
+const stats = [
+  { value: '200+', label: 'Products Decoded' },
+  { value: '60+', label: 'Drill Cards' },
+  { value: '10+', label: 'PM News Sources' },
+  { value: '5 min', label: 'Daily Commitment' },
 ];
 
 export default function LandingPage() {
-  const [drillAnswered, setDrillAnswered] = useState(false);
-  const [drillRevealed, setDrillRevealed] = useState(false);
-  const [subscribed, setSubscribed] = useState(false);
-  const [email, setEmail] = useState('');
-
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (email.trim()) {
-      setSubscribed(true);
-      setEmail('');
-    }
-  };
-
   return (
-    <div className="editorial-root" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', padding: '0 var(--space-4)' }}>
-      
-      {/* ── Top Auxiliary Navigation ── */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', padding: 'var(--space-2) 0', fontSize: '12px', borderBottom: '1px solid var(--ed-border-subtle)', color: 'var(--ed-muted)' }}>
-        <div>
-          <span style={{ marginRight: '16px' }}>🌐 www.productbuzz.app</span>
-          <span>📧 contact@productbuzz.app</span>
-        </div>
-        <div style={{ display: 'flex', gap: '16px' }}>
-          <Link href="/login" style={{ textDecoration: 'none', color: 'var(--ed-ink)', fontWeight: 600 }}>Sign In</Link>
-          <Link href="/signup" style={{ textDecoration: 'none', color: 'var(--ed-crimson)', fontWeight: 700 }}>Get Started</Link>
-        </div>
-      </div>
-
-      {/* ── Masthead (Centered Logo & Newspaper Meta) ── */}
-      <header style={{ padding: 'var(--space-6) 0 var(--space-4) 0', textAlign: 'center' }}>
-        <h1 className="font-editorial-display" style={{
-          fontSize: '4.5rem',
-          fontWeight: 800,
-          margin: 0,
-          letterSpacing: '-0.04em',
-          lineHeight: 1,
-          color: 'var(--ed-ink)',
-          textTransform: 'capitalize'
-        }}>
-          The Product Buzz
-        </h1>
-        
-        <p style={{
-          fontFamily: 'sans-serif',
-          fontSize: '11px',
-          fontWeight: 700,
-          textTransform: 'uppercase',
-          letterSpacing: '0.25em',
-          margin: 'var(--space-2) 0 var(--space-4) 0',
-          color: 'var(--ed-crimson)'
-        }}>
-          ★ TRUSTED DAILY PM INTELLIGENCE ★
-        </p>
-
-        {/* Dateline bar */}
-        <div className="news-border-double" style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          padding: '6px var(--space-4)',
-          fontSize: '11px',
-          fontWeight: 700,
-          textTransform: 'uppercase',
-          letterSpacing: '0.05em'
-        }}>
-          <span>VOL. II NO. 182</span>
-          <span>NEW DELHI, WEDNESDAY, JULY 1, 2026</span>
-          <span>5 MINUTE READS</span>
-          <span>FREE ACCESS</span>
-        </div>
-      </header>
-
-      {/* ── Top News Strip (5 Column Small News Boxes) ── */}
-      <section style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-        borderBottom: '1px solid var(--ed-border)',
-        paddingBottom: 'var(--space-2)',
-        marginBottom: 'var(--space-6)'
+    <div style={{ background: 'var(--bg-base)', minHeight: '100dvh' }}>
+      {/* Top Nav */}
+      <nav style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
+        background: 'rgba(8,8,15,0.85)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+        borderBottom: '1px solid var(--border-subtle)',
+        padding: '0 var(--space-6)',
+        height: 60,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
       }}>
-        {topBriefs.map((brief, index) => (
-          <div
-            key={index}
-            className="news-box-small"
-            style={{
-              borderRight: index < topBriefs.length - 1 ? '1px solid var(--ed-border-subtle)' : 'none',
-              paddingRight: 'var(--space-4)',
-              paddingLeft: index > 0 ? 'var(--space-4)' : '0'
-            }}
-          >
-            <img src={brief.image} alt={brief.title} />
-            <div>
-              <span className="news-tag-crimson" style={{ fontSize: '9px' }}>{brief.category}</span>
-              <h4>{brief.title}</h4>
-              <p style={{ fontSize: '11px', color: 'var(--ed-muted)', margin: 0 }}>{brief.desc}</p>
-            </div>
-          </div>
-        ))}
-      </section>
-
-      {/* ── Main Front-Page Layout (3-Column Grid) ── */}
-      <section style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr',
-        gap: 'var(--space-6)',
-        marginBottom: 'var(--space-8)'
-      }} className="lg:grid-cols-12">
-        
-        {/* Column 1: Buzz In Short (Left Sidebar - 2/12 cols) */}
-        <aside className="lg:col-span-2 news-divider-vertical" style={{ paddingRight: 'var(--space-4)' }}>
-          <h3 className="news-sidebar-title">Buzz In Short</h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-            {sidebarShorts.map((item, index) => (
-              <div
-                key={index}
-                style={{
-                  borderBottom: index < sidebarShorts.length - 1 ? '1px solid var(--ed-border-subtle)' : 'none',
-                  paddingBottom: 'var(--space-3)'
-                }}
-              >
-                <span className="news-tag-crimson" style={{ fontSize: '9px' }}>DEFINITIONS</span>
-                <h4 className="font-editorial-display" style={{ fontSize: '14px', fontWeight: 700, margin: '2px 0 4px 0', color: 'var(--ed-ink)' }}>
-                  {item.title}
-                </h4>
-                <p style={{ fontSize: '12px', color: 'var(--ed-muted)', margin: 0, lineHeight: 1.4 }}>
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </aside>
-
-        {/* Column 2: Center Lead Story (Middle - 7/12 cols) */}
-        <article className="lg:col-span-7 news-divider-vertical" style={{ paddingRight: 'var(--space-4)' }}>
-          
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-            <span className="news-tag-crimson" style={{ alignSelf: 'flex-start' }}>★ FRONT PAGE FEATURE</span>
-            
-            <h2 className="news-main-headline">
-              Flood of Daily Drills Sweeps Product Management Community
-            </h2>
-            
-            <p className="news-sub-headline">
-              Over 50,000 product thinkers build daily guesstimate and metric analysis habits using micro-swiping cards.
-            </p>
-
-            {/* Newspaper style photo with caption */}
-            <div style={{ margin: 'var(--space-2) 0' }}>
-              <img
-                src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&q=80&w=1200"
-                alt="Product meeting"
-                style={{ width: '100%', height: '240px', objectFit: 'cover', filter: 'grayscale(1)' }}
-              />
-              <p style={{ fontSize: '11px', color: 'var(--ed-muted)', margin: '4px 0 0 0', fontStyle: 'italic', borderBottom: '1px solid var(--ed-border-subtle)', paddingBottom: '6px' }}>
-                PM professionals reviewing metric formulas and guesstimate scenarios in a daily brief sprint.
-              </p>
-            </div>
-
-            {/* Multi-column text body */}
-            <div className="news-text-cols-2" style={{ fontSize: '13px', lineHeight: 1.5, color: 'var(--ed-ink)', textAlign: 'justify' }}>
-              Great Product Managers are not born—they are built through daily discipline. 
-              As tech industries consolidate, early-stage and transitioning product leaders face rigorous interviews requiring top-tier instincts. 
-              To help PMs build these habits, Product Buzz has deployed a micro-drill engine containing over 60 guesstimate challenge cards.
-              <br /><br />
-              The drills are designed to take exactly five minutes a day. Subscribers swipe through guesstimate logic, metrics, and root-cause issues, building muscle memory. Try a simulated card below to experience the system.
-            </div>
-
-            {/* Simulated Interactive Card */}
-            <div style={{
-              background: '#ffffff',
-              border: '2px solid var(--ed-border)',
-              borderRadius: '2px',
-              padding: 'var(--space-5)',
-              marginTop: 'var(--space-4)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 'var(--space-3)'
-            }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span className="news-tag-crimson" style={{ fontSize: '10px' }}>
-                  🧮 GUESSTIMATE CHALLENGE
-                </span>
-                <span style={{ fontSize: '11px', color: 'var(--ed-muted)', fontWeight: 600 }}>CARD 1 OF 5</span>
-              </div>
-
-              <p style={{ fontSize: '1.25rem', fontFamily: 'Playfair Display', fontWeight: 700, color: 'var(--ed-ink)', margin: 0, lineHeight: 1.3 }}>
-                Estimate the daily order volume of a Tier-2 city quick-commerce app in India.
-              </p>
-
-              {!drillRevealed ? (
-                <button
-                  onClick={() => setDrillRevealed(true)}
-                  className="news-btn-ghost"
-                  style={{ alignSelf: 'flex-start', padding: '4px 10px', fontSize: '11px' }}
-                >
-                  💡 Tap to reveal helper variables & solution
-                </button>
-              ) : (
-                <div style={{ fontSize: '12px', color: 'var(--ed-muted)', borderLeft: '2px solid var(--ed-crimson)', paddingLeft: '12px', lineHeight: 1.5 }}>
-                  <p style={{ fontWeight: 700, margin: '0 0 6px 0', color: 'var(--ed-ink)' }}>Approach & Solution Outline:</p>
-                  <ul style={{ margin: 0, paddingLeft: '14px' }}>
-                    <li><strong>Target population:</strong> Tier-2 city (~1,000,000 people, ~250,000 households).</li>
-                    <li><strong>Q-Commerce adoption:</strong> ~15% active user penetration = 37,500 active ordering households.</li>
-                    <li><strong>Frequency:</strong> ~2 orders/week per active household = ~10,700 orders/day total in the city.</li>
-                    <li><strong>Market Share:</strong> Assuming this app has a 40% market share = <strong>~4,300 daily orders</strong>.</li>
-                  </ul>
-                  <div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
-                    <button onClick={() => { setDrillAnswered(true); setDrillRevealed(false); }} className="news-btn-crimson" style={{ padding: '3px 8px', fontSize: '10px' }}>Got it ✓</button>
-                    <button onClick={() => { setDrillAnswered(true); setDrillRevealed(false); }} className="news-btn-ghost" style={{ padding: '3px 8px', fontSize: '10px' }}>Need review</button>
-                  </div>
-                </div>
-              )}
-
-              {drillAnswered && (
-                <div style={{
-                  border: '1px solid var(--ed-border)',
-                  background: 'var(--ed-bg)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  padding: '16px',
-                  textAlign: 'center',
-                  marginTop: '10px'
-                }}>
-                  <span style={{ fontSize: '1.25rem', fontFamily: 'Playfair Display', fontWeight: 700, marginBottom: '6px' }}>🔥 Habit Loop Triggered!</span>
-                  <p style={{ fontSize: '12px', margin: '0 0 12px 0', color: 'var(--ed-muted)' }}>
-                    Sign up now to lock in your daily streak, unlock 60+ cards, and see global PM dashboards!
-                  </p>
-                  <div style={{ display: 'flex', gap: '8px' }}>
-                    <Link href="/signup" className="news-btn-crimson" style={{ padding: '5px 10px', fontSize: '11px' }}>Create Account</Link>
-                    <button onClick={() => setDrillAnswered(false)} className="news-btn-ghost" style={{ padding: '5px 10px', fontSize: '11px' }}>Try Again</button>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <div style={{ marginTop: 'var(--space-4)' }}>
-              <Link href="/signup" className="news-btn-crimson" style={{ gap: 'var(--space-2)' }}>
-                Start Your Daily Workout →
-              </Link>
-            </div>
-          </div>
-        </article>
-
-        {/* Column 3: Trending Dictionary (Right Sidebar - 3/12 cols) */}
-        <aside className="lg:col-span-3" style={{ paddingLeft: 'var(--space-2)' }}>
-          <h3 className="news-sidebar-title">Trending Deep Dives</h3>
-          
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-            {trendingProducts.map((p) => (
-              <Link
-                key={p.rank}
-                href="/login"
-                style={{
-                  display: 'flex',
-                  gap: 'var(--space-3)',
-                  textDecoration: 'none',
-                  borderBottom: '1px solid var(--ed-border-subtle)',
-                  paddingBottom: 'var(--space-3)',
-                  cursor: 'pointer'
-                }}
-                className="group"
-              >
-                <span className="font-editorial-display" style={{
-                  fontSize: '2rem',
-                  fontWeight: 700,
-                  lineHeight: 1,
-                  color: 'var(--ed-crimson)'
-                }}>
-                  {p.rank}
-                </span>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                  <span className="news-tag-crimson" style={{ fontSize: '9px' }}>
-                    {p.category}
-                  </span>
-                  <h4 className="font-editorial-display" style={{
-                    fontSize: '15px',
-                    fontWeight: 700,
-                    color: 'var(--ed-ink)',
-                    margin: 0
-                  }}>
-                    {p.title}
-                  </h4>
-                  <p style={{ fontSize: '12px', color: 'var(--ed-muted)', margin: 0, lineHeight: 1.3 }}>
-                    {p.desc}
-                  </p>
-                  <span style={{ fontSize: '10px', color: 'var(--ed-muted)', marginTop: '2px' }}>
-                    {p.readTime}
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </aside>
-      </section>
-
-      {/* Divider */}
-      <div style={{ width: '100%', height: '1px', backgroundColor: 'var(--ed-border)', margin: 'var(--space-8) 0' }}></div>
-
-      {/* ── Bottom Section: Product of the Day Banner ── */}
-      <section style={{ marginBottom: 'var(--space-10)' }}>
-        <div style={{
-          border: '1px solid var(--ed-border)',
-          background: '#ffffff',
-          display: 'grid',
-          gridTemplateColumns: '1fr',
-          overflow: 'hidden'
-        }} className="md:grid-cols-2">
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
           <div style={{
-            height: '240px',
-            backgroundImage: 'url("https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=800")',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            filter: 'grayscale(1)'
-          }} className="md:h-auto">
+            width: 32, height: 32,
+            background: 'linear-gradient(135deg, #7C3AED, #A855F7)',
+            borderRadius: 'var(--radius-md)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: '1rem', color: 'white', fontWeight: 700,
+          }}>⚡</div>
+          <span style={{ fontWeight: 700, fontSize: 'var(--text-base)', letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>
+            Product<span style={{ color: 'var(--accent)' }}>Buzz</span>
+          </span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
+          <Link href="/login" className="btn btn-ghost">Sign in</Link>
+          <Link href="/signup" className="btn btn-primary">Get Started Free</Link>
+        </div>
+      </nav>
+
+      {/* Hero */}
+      <section className="landing-hero" style={{ paddingTop: 120 }}>
+        <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div className="hero-eyebrow">For PMs. By PMs.</div>
+
+          <h1 className="hero-title">
+            Your Daily{' '}
+            <span className="gradient-text">PM Intelligence</span>{' '}
+            Briefing
+          </h1>
+
+          <p className="hero-subtitle">
+            News, drills, and a product encyclopedia — designed to build the habits
+            that make great Product Managers. 5 minutes a day. Every day.
+          </p>
+
+          <div className="hero-actions">
+            <Link href="/signup" className="btn btn-primary btn-lg">
+              Start Building Your Habit →
+            </Link>
+            <Link href="/login" className="btn btn-secondary btn-lg">
+              Sign In
+            </Link>
           </div>
 
-          <div style={{ padding: 'var(--space-6)', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--space-3)' }}>
-            <div>
-              <span className="news-tag-crimson">PRODUCT OF THE DAY</span>
-            </div>
-            <h2 className="font-editorial-display" style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--ed-ink)', margin: 0 }}>
-              Zepto — The Q-Comm Speed Demon
-            </h2>
-            <p style={{ fontSize: '12px', color: 'var(--ed-muted)', margin: 0, lineHeight: 1.5 }}>
-              How Zepto redefined convenience commerce in India, building a $5B business in under 4 years by optimizing dark store layouts and delivery paths.
-            </p>
-            <div style={{ display: 'flex', gap: '8px', marginTop: '6px' }}>
-              <Link href="/login" className="news-btn-ink">
-                Deep Dive Analysis
-              </Link>
-              <Link href="/signup" className="news-btn-ghost">
-                Unlock 80+ Products
-              </Link>
-            </div>
+          {/* Stats */}
+          <div style={{
+            display: 'flex',
+            gap: 'var(--space-10)',
+            marginTop: 'var(--space-16)',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+          }}>
+            {stats.map((s) => (
+              <div key={s.label} style={{ textAlign: 'center' }}>
+                <div style={{
+                  fontSize: 'var(--text-3xl)',
+                  fontWeight: 800,
+                  color: 'var(--text-primary)',
+                  letterSpacing: '-0.04em',
+                  lineHeight: 1,
+                }}>{s.value}</div>
+                <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)', marginTop: 4, fontWeight: 500 }}>{s.label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── Insights Section ── */}
-      <section style={{ marginBottom: 'var(--space-12)' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-6)', borderBottom: '2px solid var(--ed-border)', paddingBottom: '4px' }}>
-          <h2 className="font-editorial-display" style={{ fontSize: '1.75rem', fontWeight: 700, margin: 0 }}>
-            Latest Insights
+      {/* Features */}
+      <section style={{ padding: 'var(--space-20) var(--space-6)', maxWidth: 1100, margin: '0 auto' }}>
+        <div style={{ textAlign: 'center', marginBottom: 'var(--space-12)' }}>
+          <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, letterSpacing: '-0.03em', marginBottom: 'var(--space-4)' }}>
+            Everything a PM needs to grow
           </h2>
-          <Link href="/signup" style={{ textDecoration: 'none', color: 'var(--ed-crimson)', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase' }}>
-            View All →
-          </Link>
+          <p style={{ color: 'var(--text-secondary)', maxWidth: 480, margin: '0 auto' }}>
+            Four focused tools, zero fluff. Built for the discipline of daily learning.
+          </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 'var(--space-6)' }} className="md:grid-cols-3">
-          {insights.map((insight, i) => (
-            <article key={i} style={{ display: 'flex', flexDirection: 'column', border: '1px solid var(--ed-border)', background: '#ffffff', padding: 'var(--space-4)' }}>
-              <div style={{ height: '140px', backgroundImage: `url(${insight.image})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'grayscale(1)', marginBottom: 'var(--space-3)' }}></div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', flexGrow: 1 }}>
-                <span className="news-tag-crimson" style={{ fontSize: '9px' }}>
-                  {insight.category}
-                </span>
-                <h3 className="font-editorial-display" style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--ed-ink)', margin: 0, lineHeight: 1.25 }}>
-                  {insight.title}
-                </h3>
-                <p style={{ fontSize: '12px', color: 'var(--ed-muted)', margin: 0, lineHeight: 1.4 }}>
-                  {insight.desc}
-                </p>
-                <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '10px', borderTop: '1px dashed var(--ed-border-subtle)', fontSize: '11px', color: 'var(--ed-muted)' }}>
-                  <span style={{ fontWeight: 600 }}>{insight.author}</span>
-                  <span>{insight.readTime}</span>
-                </div>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+          gap: 'var(--space-4)',
+        }}>
+          {features.map((f) => (
+            <div key={f.label} className="card" style={{ position: 'relative', overflow: 'hidden' }}>
+              <div style={{
+                position: 'absolute', top: 0, left: 0, right: 0, height: 2,
+                background: f.accent,
+                opacity: 0.8,
+              }} />
+              <div style={{ fontSize: '2rem', marginBottom: 'var(--space-4)' }}>{f.icon}</div>
+              <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: f.accent, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 'var(--space-2)' }}>
+                {f.label}
               </div>
-            </article>
+              <h3 style={{ fontSize: 'var(--text-lg)', fontWeight: 700, marginBottom: 'var(--space-3)', letterSpacing: '-0.02em' }}>
+                {f.title}
+              </h3>
+              <p style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', lineHeight: 'var(--leading-relaxed)' }}>
+                {f.desc}
+              </p>
+            </div>
           ))}
         </div>
       </section>
 
-      {/* ── Footer ── */}
-      <footer style={{
-        borderTop: '3px double var(--ed-border)',
-        backgroundColor: 'transparent',
-        marginTop: 'auto',
-        padding: 'var(--space-8) 0'
+      {/* ── App Preview ── */}
+      <section style={{
+        padding: 'var(--space-20) var(--space-6)',
+        background: 'var(--bg-secondary)',
+        borderTop: '1px solid var(--border-subtle)',
+        borderBottom: '1px solid var(--border-subtle)',
       }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 'var(--space-6)' }} className="md:grid-cols-12">
-          
-          {/* Newsletter Box */}
-          <div className="md:col-span-5" style={{
-            backgroundColor: '#ffffff',
-            padding: 'var(--space-4)',
-            border: '1px solid var(--ed-border)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 'var(--space-3)'
-          }}>
-            <h3 className="font-editorial-display" style={{ fontSize: '1.15rem', fontWeight: 700, margin: 0 }}>
-              Intelligence, Delivered.
-            </h3>
-            <p style={{ fontSize: '12px', color: 'var(--ed-muted)', margin: 0, lineHeight: 1.4 }}>
-              Join 50,000+ product leaders receiving our weekly synthesis of strategy, design, and growth.
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 'var(--space-12)' }}>
+            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 'var(--space-3)' }}>
+              Inside the app
+            </div>
+            <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, letterSpacing: '-0.03em', marginBottom: 'var(--space-4)' }}>
+              See what&apos;s waiting for you
+            </h2>
+            <p style={{ color: 'var(--text-secondary)', maxWidth: 480, margin: '0 auto', fontSize: 'var(--text-base)' }}>
+              A clean, distraction-free workspace built around your daily PM growth.
             </p>
-            
-            {!subscribed ? (
-              <form onSubmit={handleSubscribe} style={{ display: 'flex', gap: '6px' }}>
-                <input
-                  type="email"
-                  placeholder="Email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  style={{
-                    flexGrow: 1,
-                    backgroundColor: 'var(--ed-bg)',
-                    border: '1px solid var(--ed-border)',
-                    borderRadius: '2px',
-                    padding: '6px 10px',
-                    fontSize: '12px',
-                    outline: 'none',
-                    color: 'var(--ed-ink)'
-                  }}
-                />
-                <button type="submit" className="news-btn-crimson" style={{ padding: '6px 12px', fontSize: '11px' }}>
-                  Subscribe
-                </button>
-              </form>
-            ) : (
-              <div style={{ fontSize: '12px', color: 'var(--ed-crimson)', fontWeight: 700 }}>
-                ✓ Thank you! You&apos;re subscribed.
-              </div>
-            )}
           </div>
 
-          {/* Links columns */}
-          <div className="md:col-span-7" style={{ display: 'flex', justifyContent: 'flex-end', gap: 'var(--space-10)', flexWrap: 'wrap' }}>
-            <div>
-              <span className="font-editorial-display" style={{ fontSize: '1.15rem', fontWeight: 700, display: 'block', marginBottom: '10px' }}>
-                ProductBuzz
-              </span>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '12px' }}>
-                <Link href="/login" style={{ textDecoration: 'none', color: 'var(--ed-muted)' }}>Archives</Link>
-                <Link href="/signup" style={{ textDecoration: 'none', color: 'var(--ed-muted)' }}>About</Link>
+          {/* Browser frame mockup */}
+          <div style={{
+            background: 'var(--bg-elevated)',
+            borderRadius: 'var(--radius-2xl)',
+            border: '1px solid var(--border-default)',
+            boxShadow: '0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04)',
+            overflow: 'hidden',
+          }}>
+            {/* Browser chrome */}
+            <div style={{
+              background: 'var(--bg-overlay)',
+              borderBottom: '1px solid var(--border-subtle)',
+              padding: 'var(--space-3) var(--space-4)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 'var(--space-3)',
+            }}>
+              <div style={{ display: 'flex', gap: 6 }}>
+                {['#EF4444','#F59E0B','#10B981'].map((c) => (
+                  <div key={c} style={{ width: 12, height: 12, borderRadius: '50%', background: c, opacity: 0.8 }} />
+                ))}
+              </div>
+              <div style={{
+                flex: 1, maxWidth: 340, background: 'var(--bg-base)',
+                borderRadius: 'var(--radius-md)', padding: '4px 12px',
+                fontSize: 'var(--text-xs)', color: 'var(--text-muted)',
+                border: '1px solid var(--border-subtle)',
+              }}>
+                app.productbuzz.io/hub
               </div>
             </div>
-            <div>
-              <span style={{ fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em', display: 'block', marginBottom: '10px', color: 'var(--ed-muted)' }}>
-                Legal
-              </span>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '12px' }}>
-                <Link href="/signup" style={{ textDecoration: 'none', color: 'var(--ed-muted)' }}>Privacy Policy</Link>
-                <Link href="/signup" style={{ textDecoration: 'none', color: 'var(--ed-muted)' }}>Terms of Service</Link>
+
+            {/* App interior */}
+            <div style={{ display: 'flex', height: 420, overflow: 'hidden' }}>
+              {/* Sidebar */}
+              <div style={{
+                width: 220, flexShrink: 0,
+                borderRight: '1px solid var(--border-subtle)',
+                background: 'var(--bg-base)',
+                padding: 'var(--space-4)',
+                display: 'flex', flexDirection: 'column', gap: 'var(--space-1)',
+              }}>
+                {/* Logo */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-4)', padding: 'var(--space-2)' }}>
+                  <div style={{ width: 28, height: 28, background: 'linear-gradient(135deg, #7C3AED, #A855F7)', borderRadius: 'var(--radius-sm)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.875rem', color: 'white', fontWeight: 700 }}>⚡</div>
+                  <span style={{ fontWeight: 700, fontSize: 'var(--text-sm)', letterSpacing: '-0.02em' }}>Product<span style={{ color: 'var(--accent)' }}>Buzz</span></span>
+                </div>
+                {[
+                  { icon: '📰', label: 'The Hub', active: true },
+                  { icon: '🃏', label: 'PM Drill', active: false },
+                  { icon: '📚', label: 'Dictionary', active: false },
+                  { icon: '🤖', label: 'Buzz AI', active: false },
+                ].map((item) => (
+                  <div key={item.label} style={{
+                    display: 'flex', alignItems: 'center', gap: 'var(--space-3)',
+                    padding: 'var(--space-2) var(--space-3)',
+                    borderRadius: 'var(--radius-md)',
+                    background: item.active ? 'rgba(124,58,237,0.12)' : 'transparent',
+                    color: item.active ? 'var(--accent)' : 'var(--text-secondary)',
+                    fontSize: 'var(--text-sm)', fontWeight: item.active ? 600 : 400,
+                  }}>
+                    <span>{item.icon}</span>
+                    <span>{item.label}</span>
+                    {item.active && (
+                      <div style={{ marginLeft: 'auto', width: 6, height: 6, borderRadius: '50%', background: 'var(--accent)' }} />
+                    )}
+                  </div>
+                ))}
+                {/* Streak card */}
+                <div style={{
+                  marginTop: 'auto',
+                  background: 'linear-gradient(135deg, rgba(245,158,11,0.1), rgba(245,158,11,0.05))',
+                  border: '1px solid rgba(245,158,11,0.2)',
+                  borderRadius: 'var(--radius-md)',
+                  padding: 'var(--space-3)',
+                }}>
+                  <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginBottom: 4 }}>🔥 Current Streak</div>
+                  <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: '#F59E0B' }}>7 days</div>
+                </div>
+              </div>
+
+              {/* Main content */}
+              <div style={{ flex: 1, overflow: 'hidden', padding: 'var(--space-5)', display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+                {/* Header */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div>
+                    <h3 style={{ fontSize: 'var(--text-lg)', fontWeight: 700, letterSpacing: '-0.02em' }}>The Hub</h3>
+                    <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>Live PM intelligence — curated daily</p>
+                  </div>
+                  <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
+                    {['All','Strategy','Growth','UX','AI'].map((cat, i) => (
+                      <div key={cat} style={{
+                        padding: '3px 10px',
+                        borderRadius: 999,
+                        fontSize: '11px',
+                        fontWeight: 500,
+                        background: i === 0 ? 'var(--accent)' : 'var(--bg-overlay)',
+                        color: i === 0 ? 'white' : 'var(--text-muted)',
+                        border: i === 0 ? 'none' : '1px solid var(--border-subtle)',
+                      }}>{cat}</div>
+                    ))}
+                  </div>
+                </div>
+                {/* Article cards */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-3)', flex: 1 }}>
+                  {[
+                    { source: 'Lenny\'s Newsletter', tag: '📈 Growth', title: 'The north star metric playbook: How top PMs define what success looks like', time: '2h ago' },
+                    { source: 'Mind the Product', tag: '♟️ Strategy', title: 'Why most roadmaps fail — and the framework that fixes them', time: '4h ago' },
+                    { source: 'First Round Review', tag: '🤖 AI', title: 'Building AI-native products: what PMs need to know in 2025', time: '6h ago' },
+                    { source: 'a16z', tag: '📊 Metrics', title: 'Retention is king: the metric every consumer PM should obsess over', time: '1d ago' },
+                  ].map((article) => (
+                    <div key={article.title} style={{
+                      background: 'var(--bg-elevated)',
+                      borderRadius: 'var(--radius-lg)',
+                      border: '1px solid var(--border-subtle)',
+                      padding: 'var(--space-3)',
+                      display: 'flex', flexDirection: 'column', gap: 'var(--space-2)',
+                      overflow: 'hidden',
+                    }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+                        <span style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: 600 }}>{article.source}</span>
+                        <span style={{ fontSize: '10px', background: 'var(--bg-overlay)', borderRadius: 4, padding: '1px 6px', color: 'var(--text-secondary)' }}>{article.tag}</span>
+                        <span style={{ marginLeft: 'auto', fontSize: '10px', color: 'var(--text-muted)' }}>{article.time}</span>
+                      </div>
+                      <p style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.4 }}>{article.title}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
 
+          {/* Below mockup: 3 highlight pills */}
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 'var(--space-4)', marginTop: 'var(--space-8)', flexWrap: 'wrap' }}>
+            {[
+              { icon: '🌙', text: 'Dark-mode native' },
+              { icon: '⚡', text: 'Loads in under 1 second' },
+              { icon: '📱', text: 'Works perfectly on mobile' },
+            ].map((item) => (
+              <div key={item.text} style={{
+                display: 'flex', alignItems: 'center', gap: 'var(--space-2)',
+                padding: 'var(--space-2) var(--space-4)',
+                background: 'var(--bg-elevated)',
+                border: '1px solid var(--border-subtle)',
+                borderRadius: 999,
+                fontSize: 'var(--text-sm)',
+                color: 'var(--text-secondary)',
+              }}>
+                <span>{item.icon}</span>
+                <span>{item.text}</span>
+              </div>
+            ))}
+          </div>
         </div>
+      </section>
 
+      {/* PM Drill Showcase */}
+      <section style={{
+        padding: 'var(--space-20) var(--space-6)',
+        borderBottom: '1px solid var(--border-subtle)',
+      }}>
+        <div style={{ maxWidth: 900, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-16)', alignItems: 'center' }}>
+          <div>
+            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--warm)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 'var(--space-4)' }}>
+              🃏 PM Drill
+            </div>
+            <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, letterSpacing: '-0.03em', marginBottom: 'var(--space-5)' }}>
+              The 5-minute workout for your PM brain
+            </h2>
+            <p style={{ color: 'var(--text-secondary)', lineHeight: 'var(--leading-relaxed)', marginBottom: 'var(--space-6)' }}>
+              Swipe through 5 cards. Guesstimates. Root-cause scenarios. Framework flashcards.
+              Swipe right when you know it. Left to revisit. Track your streak.
+              Show up every day and watch your PM instincts sharpen.
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
+              {['🧮 Guesstimate challenges', '🔍 Root Cause Analysis scenarios', '📐 Framework flashcards', '📊 Metrics formulas', '💡 Real product case studies'].map((item) => (
+                <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', fontSize: 'var(--text-sm)', color: 'var(--text-secondary)' }}>
+                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--warm)', flexShrink: 0 }} />
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Mock Drill Card */}
+          <div style={{ perspective: 1200 }}>
+            <div style={{
+              background: 'linear-gradient(135deg, var(--bg-elevated), var(--bg-overlay))',
+              border: '1px solid var(--border-default)',
+              borderRadius: 'var(--radius-2xl)',
+              padding: 'var(--space-8)',
+              textAlign: 'center',
+              boxShadow: 'var(--shadow-lg)',
+              position: 'relative',
+            }}>
+              <div style={{
+                position: 'absolute', top: 'var(--space-4)', right: 'var(--space-4)',
+                display: 'flex', gap: 'var(--space-1)',
+              }}>
+                {[0,1,2,3,4].map((i) => (
+                  <div key={i} style={{
+                    width: 6, height: 6, borderRadius: '50%',
+                    background: i === 0 ? 'var(--warm)' : 'var(--border-default)',
+                  }} />
+                ))}
+              </div>
+              <div style={{ marginBottom: 'var(--space-2)' }}>
+                <span className="badge badge-guesstimate">🧮 Guesstimate</span>
+              </div>
+              <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginBottom: 'var(--space-5)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                Card 1 of 5
+              </div>
+              <p style={{ fontSize: 'var(--text-lg)', fontWeight: 600, color: 'var(--text-primary)', lineHeight: 'var(--leading-snug)', marginBottom: 'var(--space-6)' }}>
+                Estimate the daily order volume of a Tier-2 city quick-commerce app.
+              </p>
+              <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginBottom: 'var(--space-6)' }}>
+                💡 Think: population, target segment, order frequency
+              </p>
+              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--accent)', fontWeight: 500 }}>
+                Tap to reveal answer ↓
+              </div>
+            </div>
+
+            {/* Swipe hints */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 'var(--space-4)', padding: '0 var(--space-4)' }}>
+              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--error)', opacity: 0.6 }}>← Review again</div>
+              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--success)', opacity: 0.6 }}>Got it ✓ →</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section style={{
+        padding: 'var(--space-20) var(--space-6)',
+        textAlign: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
         <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          paddingTop: 'var(--space-6)',
-          borderTop: '1px solid var(--ed-border-subtle)',
-          marginTop: 'var(--space-6)',
-          fontSize: '11px',
-          color: 'var(--ed-muted)'
-        }}>
-          <span>© 2026 The Product Buzz. All rights reserved.</span>
-          <span>Made for product thinkers.</span>
+          position: 'absolute', top: '50%', left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 600, height: 400,
+          background: 'radial-gradient(ellipse, rgba(124,58,237,0.12) 0%, transparent 70%)',
+          pointerEvents: 'none',
+        }} />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <h2 style={{ fontSize: 'var(--text-4xl)', fontWeight: 800, letterSpacing: '-0.04em', marginBottom: 'var(--space-5)' }}>
+            Build the habit.<br />Become a better PM.
+          </h2>
+          <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-lg)', marginBottom: 'var(--space-8)' }}>
+            Free to start. 5 minutes a day. No excuses.
+          </p>
+          <Link href="/signup" className="btn btn-primary btn-lg" style={{ fontSize: 'var(--text-lg)', padding: 'var(--space-4) var(--space-10)' }}>
+            Start Now — It&apos;s Free
+          </Link>
         </div>
+      </section>
+
+      {/* Footer */}
+      <footer style={{
+        borderTop: '1px solid var(--border-subtle)',
+        padding: 'var(--space-8) var(--space-6)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        gap: 'var(--space-4)',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+          <span style={{ fontSize: '1rem' }}>⚡</span>
+          <span style={{ fontWeight: 700, fontSize: 'var(--text-sm)', color: 'var(--text-primary)' }}>ProductBuzz</span>
+        </div>
+        <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>
+          © 2025 Product Buzz. Built for the PM community.
+        </p>
       </footer>
     </div>
   );
