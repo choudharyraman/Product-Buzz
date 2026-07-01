@@ -34,7 +34,8 @@ export default function SignupPage() {
       });
       if (error) setError(error.message);
     } catch (err) {
-      setError('Google sign-in failed. Please try again.');
+      console.error('Google Sign-In Error:', err);
+      setError(err instanceof Error ? err.message : 'Google sign-in failed. Please try again.');
     } finally {
       setIsLoading(false);
     }
