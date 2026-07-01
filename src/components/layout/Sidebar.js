@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-
+import { usePathname, useRouter } from 'next/navigation';
+import { createClient } from '@/lib/supabase/client';
 
 const NAV_ITEMS = [
   { icon: '🏠', label: 'Home',       href: '/dashboard' },
@@ -18,8 +18,10 @@ const ACCOUNT_ITEMS = [
   { icon: '⚙️', label: 'Settings', href: '/settings' },
 ];
 
+
 export default function Sidebar({ user = null }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [localStreak, setLocalStreak] = useState(0);
 
   useEffect(() => {
@@ -31,6 +33,17 @@ export default function Sidebar({ user = null }) {
       setLocalStreak(0);
     }
   }, []);
+
+  const handleSignOut = async () => {
+    try {
+      const supabase = createClient();
+      await supabase.auth.signOut();
+      router.push('/login');
+      router.refresh();
+    } catch (err) {
+      console.error('Error signing out:', err);
+    }
+  };
 
   const isActive = (href) => {
     if (href === '/dashboard') return pathname === '/dashboard' || pathname === '/';
@@ -77,6 +90,15 @@ export default function Sidebar({ user = null }) {
             <span className="sidebar-label">{item.label}</span>
           </Link>
         ))}
+
+        <button
+          onClick={handleSignOut}
+          className="nav-item"
+          style={{ width: '100%', textAlign: 'left', background: 'none', border: 'none', cursor: 'pointer' }}
+        >
+          <span className="nav-icon" aria-hidden="true">🚪</span>
+          <span className="sidebar-label">Logout</span>
+        </button>
 
         {/* ── Footer / User ─────────────────────────── */}
         <div className="sidebar-footer">
