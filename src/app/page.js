@@ -161,11 +161,185 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* PM Drill Showcase */}
+      {/* ── App Preview ── */}
       <section style={{
         padding: 'var(--space-20) var(--space-6)',
         background: 'var(--bg-secondary)',
         borderTop: '1px solid var(--border-subtle)',
+        borderBottom: '1px solid var(--border-subtle)',
+      }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 'var(--space-12)' }}>
+            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 'var(--space-3)' }}>
+              Inside the app
+            </div>
+            <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, letterSpacing: '-0.03em', marginBottom: 'var(--space-4)' }}>
+              See what&apos;s waiting for you
+            </h2>
+            <p style={{ color: 'var(--text-secondary)', maxWidth: 480, margin: '0 auto', fontSize: 'var(--text-base)' }}>
+              A clean, distraction-free workspace built around your daily PM growth.
+            </p>
+          </div>
+
+          {/* Browser frame mockup */}
+          <div style={{
+            background: 'var(--bg-elevated)',
+            borderRadius: 'var(--radius-2xl)',
+            border: '1px solid var(--border-default)',
+            boxShadow: '0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04)',
+            overflow: 'hidden',
+          }}>
+            {/* Browser chrome */}
+            <div style={{
+              background: 'var(--bg-overlay)',
+              borderBottom: '1px solid var(--border-subtle)',
+              padding: 'var(--space-3) var(--space-4)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 'var(--space-3)',
+            }}>
+              <div style={{ display: 'flex', gap: 6 }}>
+                {['#EF4444','#F59E0B','#10B981'].map((c) => (
+                  <div key={c} style={{ width: 12, height: 12, borderRadius: '50%', background: c, opacity: 0.8 }} />
+                ))}
+              </div>
+              <div style={{
+                flex: 1, maxWidth: 340, background: 'var(--bg-base)',
+                borderRadius: 'var(--radius-md)', padding: '4px 12px',
+                fontSize: 'var(--text-xs)', color: 'var(--text-muted)',
+                border: '1px solid var(--border-subtle)',
+              }}>
+                app.productbuzz.io/hub
+              </div>
+            </div>
+
+            {/* App interior */}
+            <div style={{ display: 'flex', height: 420, overflow: 'hidden' }}>
+              {/* Sidebar */}
+              <div style={{
+                width: 220, flexShrink: 0,
+                borderRight: '1px solid var(--border-subtle)',
+                background: 'var(--bg-base)',
+                padding: 'var(--space-4)',
+                display: 'flex', flexDirection: 'column', gap: 'var(--space-1)',
+              }}>
+                {/* Logo */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-4)', padding: 'var(--space-2)' }}>
+                  <div style={{ width: 28, height: 28, background: 'linear-gradient(135deg, #7C3AED, #A855F7)', borderRadius: 'var(--radius-sm)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.875rem', color: 'white', fontWeight: 700 }}>⚡</div>
+                  <span style={{ fontWeight: 700, fontSize: 'var(--text-sm)', letterSpacing: '-0.02em' }}>Product<span style={{ color: 'var(--accent)' }}>Buzz</span></span>
+                </div>
+                {[
+                  { icon: '📰', label: 'The Hub', active: true },
+                  { icon: '🃏', label: 'PM Drill', active: false },
+                  { icon: '📚', label: 'Dictionary', active: false },
+                  { icon: '🤖', label: 'Buzz AI', active: false },
+                ].map((item) => (
+                  <div key={item.label} style={{
+                    display: 'flex', alignItems: 'center', gap: 'var(--space-3)',
+                    padding: 'var(--space-2) var(--space-3)',
+                    borderRadius: 'var(--radius-md)',
+                    background: item.active ? 'rgba(124,58,237,0.12)' : 'transparent',
+                    color: item.active ? 'var(--accent)' : 'var(--text-secondary)',
+                    fontSize: 'var(--text-sm)', fontWeight: item.active ? 600 : 400,
+                  }}>
+                    <span>{item.icon}</span>
+                    <span>{item.label}</span>
+                    {item.active && (
+                      <div style={{ marginLeft: 'auto', width: 6, height: 6, borderRadius: '50%', background: 'var(--accent)' }} />
+                    )}
+                  </div>
+                ))}
+                {/* Streak card */}
+                <div style={{
+                  marginTop: 'auto',
+                  background: 'linear-gradient(135deg, rgba(245,158,11,0.1), rgba(245,158,11,0.05))',
+                  border: '1px solid rgba(245,158,11,0.2)',
+                  borderRadius: 'var(--radius-md)',
+                  padding: 'var(--space-3)',
+                }}>
+                  <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginBottom: 4 }}>🔥 Current Streak</div>
+                  <div style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: '#F59E0B' }}>7 days</div>
+                </div>
+              </div>
+
+              {/* Main content */}
+              <div style={{ flex: 1, overflow: 'hidden', padding: 'var(--space-5)', display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+                {/* Header */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div>
+                    <h3 style={{ fontSize: 'var(--text-lg)', fontWeight: 700, letterSpacing: '-0.02em' }}>The Hub</h3>
+                    <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>Live PM intelligence — curated daily</p>
+                  </div>
+                  <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
+                    {['All','Strategy','Growth','UX','AI'].map((cat, i) => (
+                      <div key={cat} style={{
+                        padding: '3px 10px',
+                        borderRadius: 999,
+                        fontSize: '11px',
+                        fontWeight: 500,
+                        background: i === 0 ? 'var(--accent)' : 'var(--bg-overlay)',
+                        color: i === 0 ? 'white' : 'var(--text-muted)',
+                        border: i === 0 ? 'none' : '1px solid var(--border-subtle)',
+                      }}>{cat}</div>
+                    ))}
+                  </div>
+                </div>
+                {/* Article cards */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-3)', flex: 1 }}>
+                  {[
+                    { source: 'Lenny\'s Newsletter', tag: '📈 Growth', title: 'The north star metric playbook: How top PMs define what success looks like', time: '2h ago' },
+                    { source: 'Mind the Product', tag: '♟️ Strategy', title: 'Why most roadmaps fail — and the framework that fixes them', time: '4h ago' },
+                    { source: 'First Round Review', tag: '🤖 AI', title: 'Building AI-native products: what PMs need to know in 2025', time: '6h ago' },
+                    { source: 'a16z', tag: '📊 Metrics', title: 'Retention is king: the metric every consumer PM should obsess over', time: '1d ago' },
+                  ].map((article) => (
+                    <div key={article.title} style={{
+                      background: 'var(--bg-elevated)',
+                      borderRadius: 'var(--radius-lg)',
+                      border: '1px solid var(--border-subtle)',
+                      padding: 'var(--space-3)',
+                      display: 'flex', flexDirection: 'column', gap: 'var(--space-2)',
+                      overflow: 'hidden',
+                    }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+                        <span style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: 600 }}>{article.source}</span>
+                        <span style={{ fontSize: '10px', background: 'var(--bg-overlay)', borderRadius: 4, padding: '1px 6px', color: 'var(--text-secondary)' }}>{article.tag}</span>
+                        <span style={{ marginLeft: 'auto', fontSize: '10px', color: 'var(--text-muted)' }}>{article.time}</span>
+                      </div>
+                      <p style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.4 }}>{article.title}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Below mockup: 3 highlight pills */}
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 'var(--space-4)', marginTop: 'var(--space-8)', flexWrap: 'wrap' }}>
+            {[
+              { icon: '🌙', text: 'Dark-mode native' },
+              { icon: '⚡', text: 'Loads in under 1 second' },
+              { icon: '📱', text: 'Works perfectly on mobile' },
+            ].map((item) => (
+              <div key={item.text} style={{
+                display: 'flex', alignItems: 'center', gap: 'var(--space-2)',
+                padding: 'var(--space-2) var(--space-4)',
+                background: 'var(--bg-elevated)',
+                border: '1px solid var(--border-subtle)',
+                borderRadius: 999,
+                fontSize: 'var(--text-sm)',
+                color: 'var(--text-secondary)',
+              }}>
+                <span>{item.icon}</span>
+                <span>{item.text}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PM Drill Showcase */}
+      <section style={{
+        padding: 'var(--space-20) var(--space-6)',
         borderBottom: '1px solid var(--border-subtle)',
       }}>
         <div style={{ maxWidth: 900, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-16)', alignItems: 'center' }}>
